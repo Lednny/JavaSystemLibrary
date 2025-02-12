@@ -1,29 +1,29 @@
 public class Book {
     private String title;
     private String author;
-    private String type;    // GENERO 
-    private int stock; 
+    private String type; // GENERO
+    private int stock;
 
-    public Book(String title, String author, String type, int stock){
+    public Book(String title, String author, String type, int stock) {
         this.title = title;
         this.author = author;
         this.type = type;
         this.stock = stock;
     }
 
-    //  Print data
+    // Print data
     public void mostrarInfo() {
-        System.out.println("Título: " + title);
-        System.out.println("Autor: " + author);
-        System.out.println("Gènero " + type);
-        if(stock>0){
+        System.out.println("Título:   " + title);
+        System.out.println("Autor:    " + author);
+        System.out.println("Gènero:   " + type);
+        if (stock > 0) {
             System.out.println("En stock: " + stock);
-        }else{
+        } else {
             System.out.println("Sin stock: " + stock);
         }
     }
 
-    //  METODOS
+    // METODOS
 
     public String getTitle() {
         return title;
@@ -32,15 +32,15 @@ public class Book {
     public String getAuthor() {
         return author;
     }
+
     public String getType() {
         return type;
     }
-    
+
     public int getStock() {
         return stock;
     }
 
 
-
+    
 }
-
