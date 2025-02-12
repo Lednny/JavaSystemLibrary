@@ -9,14 +9,16 @@ public class MainBilbioteca{
         //Menú
         System.out.println("¡Hola, Bienvenido a la Biblioteca virtual de Java!");
 
+        System.out.println("");
+
         while (continuar) {
             System.out.println("");
-            System.out.println("----Menú de la Biblioteca---");
-            System.out.println("¿Qué deseas realizar?");
-            System.out.println("1. Búsqueda de libro");
-            System.out.println("2. Préstamo de Libros ");
-            System.out.println("3. Registro de ");
-            System.out.println("4. División.");
+            System.out.println("---------------------------Menú de la Biblioteca Virtual-----------------------------");
+            System.out.println("  ¿Qué deseas realizar? ");
+            System.out.println("1. Registro de Usuario");
+            System.out.println("2. Búsqueda de libro ");
+            System.out.println("3. Préstamo de libro ");
+            System.out.println("4. Registro de libro");
             System.out.println("Presiona la tecla 5 si deseas salir.");
 
             System.out.println("");
