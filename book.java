@@ -1,10 +1,10 @@
-public class book {
+public class Book {
     private String title;
     private String author;
     private String type;    // GENERO 
     private int stock; 
 
-    public book(String title, String author, String type, int stock){
+    public Book(String title, String author, String type, int stock){
         this.title = title;
         this.author = author;
         this.type = type;
