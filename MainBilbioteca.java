@@ -13,11 +13,11 @@ public class MainBilbioteca{
             System.out.println("");
             System.out.println("----Menú de la Biblioteca---");
             System.out.println("¿Qué deseas realizar?");
-            System.out.println("1. Búsqueda de libro");
-            System.out.println("2. Préstamo de Libros ");
-            System.out.println("3. Registro de ");
-            System.out.println("4. División.");
-            System.out.println("Presiona la tecla 5 si deseas salir.");
+            System.out.println("1. Registro de usuario / login. ");
+            System.out.println("2. Buscar libro. ");
+            System.out.println("3. Prestar libro. ");
+            System.out.println("4. Devolver libro. ");
+            System.out.println("5. Opciones de administrador. ");
 
             System.out.println("");
 
@@ -28,13 +28,19 @@ public class MainBilbioteca{
 
             switch (taskChoise) {
                 case 1:
-                    
+                
                     break;
                 case 2:
-
+                
                     break;
                 case 3: 
-                    
+                
+                    break;
+                case 4: 
+                
+                    break;
+                case 5: 
+                
                     break;
                 default:
                     System.out.println("Opción no válida, intentelo de nuevo. ");
