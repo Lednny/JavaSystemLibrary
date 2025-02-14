@@ -7,7 +7,7 @@ public class Cliente {
         this.email = email;
     }
 
-    public void mostrarInfo() {
+    public void infoUser() {
         System.out.println("Nombre: " + nombre);
         System.out.println("Email:  " + email);
     }

@@ -11,8 +11,12 @@ public class Book {
         this.stock = stock;
     }
 
+    public String toString(){
+        return "Título: " + title + "\n Autor: " + author + "\n Género: " + type + "\n Stock: " + stock + "\n";
+    }
+
     // Print data
-    public void mostrarInfo() {
+    public void mostrarInfo(){ 
         System.out.println("Título:   " + title);
         System.out.println("Autor:    " + author);
         System.out.println("Gènero:   " + type);
@@ -20,7 +24,7 @@ public class Book {
             System.out.println("En stock: " + stock);
         } else {
             System.out.println("Sin stock: " + stock);
-        }
+        }    
     }
 
     // METODOS
