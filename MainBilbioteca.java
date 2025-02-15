@@ -7,7 +7,8 @@ public class MainBilbioteca {
     //     Funcion prueba < Impresion de clientes  >
     public static void printClients(List<Cliente> clientes){
         for(int i = 0; i < clientes.size(); i++){                  
-            System.out.println("Cliente: " + clientes.get(i).getNombre() + "\n" +" Email: " + clientes.get(i).getEmail());
+            System.out.println("-Cliente: " + clientes.get(i).getNombre() + "\n" +"Email: " + clientes.get(i).getEmail());
+            System.out.println("");
         }
     }
     
@@ -57,8 +58,11 @@ public class MainBilbioteca {
             System.out.println("5. Estado de inventario. ");     // Impresion de stock
             System.out.println("6. Estatus de Usuarios/Clientes.");
             System.out.println();
+            System.out.println("---------------------------------------------------------------------------------------");
             int taskChoise = input.nextInt();
+            System.out.println("---------------------------------------------------------------------------------------");
             System.out.println();
+
 
             switch (taskChoise) {
                 case 1:
@@ -115,8 +119,10 @@ public class MainBilbioteca {
                     printStock(stockB);
                         break;
                 case 6:
-                    System.out.println("Lista de clientes registrados: ");
+                    System.out.println("Lista de clientes registrados:");
+                    System.out.println("Usuarios registrados: " + clientes.size() + "\n");
                     printClients(clientes); 
+                    System.out.println("");
                         break;
                 default:
                     System.out.println("Opción no válida, intentelo de nuevo. ");
