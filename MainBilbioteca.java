@@ -33,6 +33,8 @@ public class MainBilbioteca {
         StockBook stockB = new StockBook(); 
         String nombre;
         String email;
+        String devolucion = "";
+        String prestamo = "";
         // Cliente nuevoUsuario = new Cliente("", "");
 
         // Variables
@@ -105,9 +107,76 @@ public class MainBilbioteca {
                     if(!encontrado){
                         System.out.println("No se encontró el libro.");
                     }
+
+
+                System.out.println("¿Desea realizar un préstamo? \n 1. Sí \n 2. No");
+                int lendChoise = input.nextInt();
+
+                if(lendChoise == 1){
+                    //
+   //                 System.out.println("Ingrese el nombre del libro a prestar: ");
+   //             prestamo = input.nextLine();
+   //             String prestamo1 = prestamo.toLowerCase();
+   //                 for(Book book : stock.getBooks()) {
+   //                     if (book.getTitle().toLowerCase().contains(prestamo1)){
+   //                         encontrado = true;
+   //                         if(!encontrado){
+   //                             System.out.println("No se encontró el libro.");
+   //                         }
+   //                         if(book.prestamo()){
+   //                             System.out.println("El libro: " + book.getTitle() + " fue prestado con éxito" + "al usuario: " + clientes.get(clientes.size() - 1).getNombre());
+   //                         }else{
+   //                             System.out.println("El libro: " + book.getTitle() + " no está disponible.");
+   //                         }
+   //                         break;
+   //                     }
+   //                 }
+   //                 if(!encontrado){
+   //                     System.out.println("No se encontró el libro.");
+   //                 }
+
+                    //Préstamo de libro 
+//                    encontrado = false;
+//
+//                    System.out.println("Ingrese el nombre del libro a prestar: ");
+//                prestamo = input.nextLine();
+//                    for(Book book : stock.getBooks()) {
+//                        if (book.getTitle().equalsIgnoreCase(prestamo)){
+//                            encontrado = true;
+//                            if(!encontrado){
+//                                System.out.println("No se encontró el libro.");
+//                            }
+//                            if(book.prestamo()){
+//                                System.out.println("El libro: " + book.getTitle() + " fue prestado con éxito" + "al usuario: " + clientes.get(clientes.size() - 1).getNombre());
+//                            }else{
+//                                System.out.println("El libro: " + book.getTitle() + " no está disponible.");
+//                            }
+//                            break;
+//                        }
+//                    }
+//                    if(!encontrado){
+//                        System.out.println("No se encontró el libro.");
+//                    }
+
                         break;
+                    }
                 case 3:
                     System.out.println("3. Devolución de Book ");
+                    System.out.println("Ingrese el nombre del libro a devolver: ");
+                    devolucion = input.nextLine();
+                    encontrado = false;
+                    
+                    for (Book book : stockB.getBooks()){
+                        if (book.getTitle().toLowerCase().contains(devolucion.toLowerCase())){
+                            book.devolver();
+                            System.out.println("El libro" + book.getTitle() + " ha sido devuelto con éxito.");
+                            encontrado = true;
+                            break;
+                        }
+                    }
+                    if(!encontrado){
+                        System.out.println("No se encontró el libro.");
+                    }
                         break;
                 case 4:
                     System.out.println("4. Registro de nuevo Book");

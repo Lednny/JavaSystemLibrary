@@ -44,7 +44,10 @@ public class Book {
     public int getStock() {
         return stock;
     }
-
-
     
+
+        //Método para devolver un libro
+    public void devolver() {
+        stock++;  
+    }
 }
