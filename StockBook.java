@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StockBook{
-    private List<Book> allBooks; 
+    public List<Book> allBooks; 
     
     public StockBook() {
         allBooks = new ArrayList<>();

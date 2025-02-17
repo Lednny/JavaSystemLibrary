@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MainBilbioteca {
 
-    //     Funcion prueba < Impresion de clientes  >
+    //     Funcion < Impresion de clientes  >
     public static void printClients(List<Cliente> clientes){
         for(int i = 0; i < clientes.size(); i++){                  
             System.out.println("-Cliente: " + clientes.get(i).getNombre() + "\n" +"Email: " + clientes.get(i).getEmail());
@@ -13,7 +13,7 @@ public class MainBilbioteca {
     }
     
 
-    //      Funcion impresión de stock
+    //      Funcion < Impresión de stock >
     public static void printStock(StockBook stockB){
         List<Book> books = stockB.getBooks();
         for (Book  book : books) {
@@ -28,8 +28,7 @@ public class MainBilbioteca {
 
 
     public static void main(String args[]) {
-        List<Cliente> clientes = new ArrayList<>();
-        List<Book> Book = new ArrayList<>();        //   INSTANCIA 
+        List<Cliente> clientes = new ArrayList<>();        //   INSTANCIA 
         StockBook stockB = new StockBook(); 
         String nombre;
         String email;
@@ -48,8 +47,8 @@ public class MainBilbioteca {
             System.out.println("");
             System.out.println("-------------------------- Menú de la Biblioteca Virtual ----------------------------");
             System.out.println(">>>  ¿Qué deseas realizar?  <<<");
-            System.out.println("1. Registro de Usuario ");  // Despliega lista de Books - busqueda - opcion de prestamo
-            System.out.println("2. Búsqueda de Book ");
+            System.out.println("1. Registro de Usuario ");  
+            System.out.println("2. Búsqueda de Book ");         // Despliega lista de Books - busqueda - opcion de prestamo
             System.out.println("3. Devolución de Book ");
             System.out.println();
             System.out.println(">>>  Opciones de gestión  <<<");
@@ -62,6 +61,8 @@ public class MainBilbioteca {
             int taskChoise = input.nextInt();
             System.out.println("---------------------------------------------------------------------------------------");
             System.out.println();
+            Timer.main(null);
+            CleanScreen.CleanScreen();
 
 
             switch (taskChoise) {
@@ -76,7 +77,9 @@ public class MainBilbioteca {
                     clientes.add(new Cliente(nombre, email));
                     clientes.get(clientes.size() - 1).infoUser();
                     System.out.println("Usuario añadido con éxito!");
-                        break;
+                    Timer.main(null);
+                    CleanScreen.CleanScreen();
+                    break;
 
                 case 2:
                     //Instancia
@@ -87,7 +90,7 @@ public class MainBilbioteca {
                     boolean encontrado = false;
                     
                     System.out.println("2. Búsqueda de Libro (Género, título o autor). ");
-                    System.out.println("Generos disponibles: \n" + "-Terror: \n" + "-Comedia: \n" + "-Fantasia: \n" + "-Ficción: \n" + "-Romance: \n" + "-Documentales: \n" + "-Infantiles: \n");
+                    System.out.println("Generos disponibles: \n" + "-Terror. \n" + "-Comedia. \n" + "-Fantasia. \n" + "-Ficción. \n" + "-Romance. \n" + "-Documentales. \n" + "-Infantiles. \n");
                     System.out.println("");
                     
                     input.nextLine();
@@ -104,13 +107,27 @@ public class MainBilbioteca {
                     }
                     if(!encontrado){
                         System.out.println("No se encontró el libro.");
+                        
                     }
                         break;
                 case 3:
                     System.out.println("3. Devolución de Book ");
                         break;
                 case 4:
-                    System.out.println("4. Registro de nuevo Book");
+                System.out.println("4. Registro de nuevo Book");
+                System.out.println("Ingrese el título del libro: " + input.nextLine());
+                String title = input.nextLine();
+                System.out.println("Ingrese el autor del libro: ");
+                String author = input.nextLine();
+                System.out.println("Ingrese el género del libro: ");
+                String type = input.nextLine();
+                System.out.println("Ingrese el stock del libro: ");
+                int stock1 = input.nextInt();
+//                allBooks.add(new Book(title, author, type, stock));       ERROR AL MOMENTO DE ALMACENAR EL NUEVO OBJETO
+//                allBooks.get(allBooks.size() - 1).infoBook();
+                System.out.println("Libro añadido con éxito!");
+                    System.out.println();
+
                         break;
                 case 5: 
                     System.out.println(">>    Estado de inventario    <<");

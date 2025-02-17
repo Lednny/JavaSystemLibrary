@@ -29,6 +29,11 @@ public class Book {
 
     // METODOS
 
+    public void infoBook() {
+        System.out.println("Titulo: " + title);
+        System.out.println("Autor:  " + author);
+    }
+
     public String getTitle() {
         return title;
     }
