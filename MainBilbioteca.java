@@ -117,28 +117,6 @@ public class MainBilbioteca {
                 int lendChoise = input.nextInt();
 
                 if(lendChoise == 1){
-                    //
-   //                 System.out.println("Ingrese el nombre del libro a prestar: ");
-   //             prestamo = input.nextLine();
-   //             String prestamo1 = prestamo.toLowerCase();
-   //                 for(Book book : stock.getBooks()) {
-   //                     if (book.getTitle().toLowerCase().contains(prestamo1)){
-   //                         encontrado = true;
-   //                         if(!encontrado){
-   //                             System.out.println("No se encontró el libro.");
-   //                         }
-   //                         if(book.prestamo()){
-   //                             System.out.println("El libro: " + book.getTitle() + " fue prestado con éxito" + "al usuario: " + clientes.get(clientes.size() - 1).getNombre());
-   //                         }else{
-   //                             System.out.println("El libro: " + book.getTitle() + " no está disponible.");
-   //                         }
-   //                         break;
-   //                     }
-   //                 }
-   //                 if(!encontrado){
-   //                     System.out.println("No se encontró el libro.");
-   //                 }
-
                     //Préstamo de libro 
 //                    encontrado = false;
 //
