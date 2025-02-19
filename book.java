@@ -29,10 +29,22 @@ public class Book {
 
     // METODOS
 
-    public void infoBook() {
-        System.out.println("Titulo: " + title);
-        System.out.println("Autor:  " + author);
+    public boolean prestado() {
+        if (this.stock > 0) {
+            this.stock--;
+            return true;
+        }
+        return false;
     }
+
+//    public void reduceStock  (int Quantity) {
+//        if(Quantity > 0 && Quantity <= 2){
+//            stock -= Quantity;
+//        } else {
+//            System.out.println("No hay suficiente stock.");
+//        }
+//        
+//    }
 
     public String getTitle() {
         return title;

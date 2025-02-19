@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class StockBook{
-    public List<Book> allBooks; 
+    public static List<Book> allBooks; 
     
     public StockBook() {
         allBooks = new ArrayList<>();
@@ -38,8 +39,28 @@ public class StockBook{
         allBooks.add(new Book("Alicia en el País de las Maravillas", "Lewis Carroll", "Infantiles", 5));
     }
 
+    public void addBook(Book book) {
+        allBooks.add(book);
+    }
+
+    public int getQuantity(int Quantity) {
+        return Quantity;
+    }   
+
     //      Obtener libros
     public List<Book> getBooks() {
         return new ArrayList<>(allBooks);
     }
+
+    //      Transferir libro a objeto cliente < as a lend >
+//    public boolean transferBook(String title, int Quantity) {
+//        Book book = ;       // Obtener el valor resultante de <buscar libro>
+//                if (book != null && book.getStock() >= Quantity) {
+//                    book.reduceStock(Quantity);
+//                    return true;
+//                } else {
+//                    System.out.println("Error: No se pudo transferir el stock.");
+//                    return false;
+//                }
+//            }
 }

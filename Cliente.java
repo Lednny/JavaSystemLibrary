@@ -10,15 +10,16 @@ public class Cliente {
         this.email = email;
     }
 
-    public List<Book> searchBook(String title) {
-        List<Book> books = new ArrayList<Book>();
-        for (Book book : books) {
-            if (book.getTitle().contains(title)) {
-                books.add(book);
-            }
-        }
-        return books;
-    }
+    //     NO SE ESTA USANDO ¿?
+//    public List<Book> searchBook(String title) {
+//        List<Book> books = new ArrayList<Book>();
+//        for (Book book : books) {
+//            if (book.getTitle().contains(title)) {
+//                books.add(book);
+//            }
+//        }
+//        return books;
+//    }
 
     public void infoUser() {
         System.out.println("Nombre: " + nombre);
