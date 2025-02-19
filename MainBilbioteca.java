@@ -4,9 +4,32 @@ import java.util.Scanner;
 
 public class MainBilbioteca {
 
+    //  Funcion <Find book for lend>
+    public static void searchLend(String prestamo, List<Book> allBooksList, List<Prestamo> prestamos, Cliente clienteEncontrado){
+        Book bookPrestado = null;
+        for (Book book : allBooksList){
+            if (book.getTitle().toLowerCase().contains(prestamo.toLowerCase())){
+                bookPrestado = book;
+                break;
+            }
+        }
+
+        if(bookPrestado == null){
+            System.out.println("No se encontró el libro.");
+            main(null);
+        } else if (bookPrestado.getStock() > 0){
+            prestamos.add(new Prestamo(clienteEncontrado, bookPrestado));
+            reduceStock(bookPrestado);
+
+            System.out.println("El libro " + bookPrestado.getTitle() + " ha sido prestado con éxito.");
+        } else{
+            System.out.println("No hay stock disponible para el libro " + bookPrestado.getTitle());
+        }
+    }
+
     //  Funcion <Reducir Stock>
     public static void reduceStock(Book book){
-        while (book.getStock() > 0) {
+        while (book.getStock() > 0){
             book.prestado();
             System.out.println("<PRUEBA> Stock reducido con éxito.");
             
@@ -76,6 +99,7 @@ public class MainBilbioteca {
         String email = "";
         String devolucion = "";
         String prestamo = "";
+        int quantityLend;
 
         // Cliente nuevoUsuario = new Cliente("", "");
 
@@ -158,6 +182,9 @@ public class MainBilbioteca {
                     }
                 // Préstamo del libro 
                     if(lendChoise == 1){
+
+                //<PRUEBA> Error de secuencia
+
 //                    //Buscar al cliente 
 //                    System.out.println("Ingrese el nombre del cliente: ");
 //                    input.nextLine(); //Limpiar buffer
@@ -175,25 +202,42 @@ public class MainBilbioteca {
 //                    }
                         System.out.println("Ingrese el nombre del libro a prestar: ");
                         prestamo = input.nextLine();
-                        Book bookPrestado = null;
-                        
-                        for (Book book : allBooksList){
-                            if (book.getTitle().toLowerCase().contains(prestamo.toLowerCase())){
-                                bookPrestado = book;
-                                break;
-                            }
+                        System.out.println("Ingrese la cantidad de libros a prestar límite de 2 libros por usuario: )");
+                        quantityLend = input.nextInt();
+
+                        if(quantityLend <= 2){
+                            System.out.println("Cantidad de libros a prestar: " + quantityLend);
+                            searchLend(prestamo, allBooksList, prestamos, clienteEncontrado);
+                            reduceStock(null); 
+                        }else if(quantityLend > 2){
+                            System.out.println("No se puede prestar más de 2 libros por usuario.");
+                            break;
+                        }else{
+                            System.out.println("No hay suficiente stock para proporcionar este libro");
+                            break;
                         }
 
-                        if(bookPrestado == null){
-                            System.out.println("No se encontró el libro.");
-                            break;
-                        } else if (bookPrestado.getStock() > 0){
-                            prestamos.add(new Prestamo(clienteEncontrado, bookPrestado));
-                            reduceStock(bookPrestado);
-                            System.out.println("El libro " + bookPrestado.getTitle() + " ha sido prestado con éxito.");
-                        } else{
-                            System.out.println("No hay stock disponible para el libro " + bookPrestado.getTitle());
-                        }
+                        
+                // <PRUEBA> Código de la funcion <searchLend>
+//                        Book bookPrestado = null;
+//                        for (Book book : allBooksList){
+//                            if (book.getTitle().toLowerCase().contains(prestamo.toLowerCase())){
+//                                bookPrestado = book;
+//                                break;
+//                            }
+//                        }//
+
+//                        if(bookPrestado == null){
+//                            System.out.println("No se encontró el libro.");
+//                            break;
+//                        } else if (bookPrestado.getStock() > 0){
+//                            prestamos.add(new Prestamo(clienteEncontrado, bookPrestado));
+//                            reduceStock(bookPrestado);//
+
+//                            System.out.println("El libro " + bookPrestado.getTitle() + " ha sido prestado con éxito.");
+//                        } else{
+//                            System.out.println("No hay stock disponible para el libro " + bookPrestado.getTitle());
+//                        }
 
                         }else if (lendChoise == 2){
                             System.out.println("Regresando al menú principal...");
@@ -203,6 +247,8 @@ public class MainBilbioteca {
                         }
                         break;
                 case 3:
+
+            //      EN DESARROLLO <pendiente>
                     System.out.println("3. Devolución de Book ");
                     System.out.println("Ingrese el nombre del libro a devolver: ");
                     devolucion = input.nextLine();
@@ -230,7 +276,7 @@ public class MainBilbioteca {
                 String type = input.nextLine();
                 System.out.println("Ingrese el stock del libro: ");
                 int stock1 = input.nextInt();
-                stockB.addBook(new Book(title, author, type, stock1));       //ERROR AL MOMENTO DE ALMACENAR EL NUEVO OBJETO
+                stockB.addBook(new Book(title, author, type, stock1));       
                 stockB.getBooks().get(stockB.getBooks().size() - 1).toString();
                 System.out.println("Libro añadido con éxito!");
                     System.out.println();
@@ -245,8 +291,9 @@ public class MainBilbioteca {
                 case 6:
                     System.out.println("Lista de clientes registrados:");
                     System.out.println("Usuarios registrados: " + clientes.size() + "\n");
+                    System.out.println();
                     printClients(clientes); 
-                    System.out.println("");
+                    System.out.println();
                         break;
                 default:
                     System.out.println("Opción no válida, intentelo de nuevo. ");
