@@ -1,6 +1,22 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente {
     private String nombre;
     private String email;
+
+// Lista incicial de clientes
+    public List<Cliente> stockC;
+
+    public Cliente() {
+        stockC = new ArrayList<>();
+        stockC.add(new Cliente("Invitado", "invitado.mail"));
+    }
+
+    //      Obtener clientes
+    public List<Cliente> getCliente() {
+        return new ArrayList<>(stockC);
+    }
 
     public Cliente(String nombre, String email) {
         this.nombre = nombre;
@@ -27,5 +43,9 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
+
+//    public String getClientes(){
+//        return List<Cliente> clientes;
+//    }
 
 }

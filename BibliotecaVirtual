@@ -1,0 +1,109 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class BibliotecaVirtual {
+    private static List<Libro> libros = new ArrayList<>();
+    private static List<Cliente> clientes = new ArrayList<>();
+    private static List<Prestamo> prestamos = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        inicializarDatos();
+
+        while (true) {
+            System.out.println("Menú de opciones:");
+            System.out.println("1. Registrar préstamo");
+            System.out.println("2. Ver préstamos");
+            System.out.println("3. Salir");
+            System.out.print("Seleccione una opción: ");
+            int opcion = scanner.nextInt();
+            scanner.nextLine();  // Consumir el salto de línea
+
+            switch (opcion) {
+                case 1:
+                    registrarPrestamo(scanner);
+                    break;
+                case 2:
+                    verPrestamos();
+                    break;
+                case 3:
+                    System.out.println("Saliendo del sistema...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Opción no válida. Por favor, seleccione una opción del 1 al 3.");
+                    break;
+            }
+        }
+    }
+
+    private static void inicializarDatos() {
+        // Agregar libros
+        libros.add(new Libro("El Quijote", "Miguel de Cervantes", 3));
+        libros.add(new Libro("Cien años de soledad", "Gabriel García Márquez", 2));
+        libros.add(new Libro("La Odisea", "Homero", 1));
+
+        // Agregar clientes
+        clientes.add(new Cliente("Juan Pérez", "001"));
+        clientes.add(new Cliente("María López", "002"));
+        clientes.add(new Cliente("Carlos Sánchez", "003"));
+    }
+
+    private static void registrarPrestamo(Scanner scanner) {
+        System.out.println("Lista de libros:");
+        for (int i = 0; i < libros.size(); i++) {
+            System.out.println((i + 1) + ". " + libros.get(i));
+        }
+        System.out.print("Seleccione el número del libro a prestar: ");
+        int indiceLibro = scanner.nextInt() - 1;
+        scanner.nextLine();  // Consumir el salto de línea
+
+        if (indiceLibro < 0 || indiceLibro >= libros.size()) {
+            System.out.println("Número de libro no válido.");
+            return;
+        }
+
+        Libro libro = libros.get(indiceLibro);
+        if (!libro.isDisponible()) {
+            System.out.println("El libro no está disponible.");
+            return;
+        }
+
+        System.out.println("Lista de clientes:");
+        for (int i = 0; i < clientes.size(); i++) {
+            System.out.println((i + 1) + ". " + clientes.get(i));
+        }
+        System.out.print("Seleccione el número del cliente: ");
+        int indiceCliente = scanner.nextInt() - 1;
+        scanner.nextLine();  // Consumir el salto de línea
+
+        if (indiceCliente < 0 || indiceCliente >= clientes.size()) {
+            System.out.println("Número de cliente no válido.");
+            return;
+        }
+
+        Cliente cliente = clientes.get(indiceCliente);
+
+        System.out.print("Ingrese la fecha de préstamo (YYYY-MM-DD): ");
+        String fechaPrestamo = scanner.nextLine();
+        System.out.print("Ingrese la fecha de devolución (YYYY-MM-DD): ");
+        String fechaDevolucion = scanner.nextLine();
+
+        Prestamo prestamo = new Prestamo(libro, cliente, fechaPrestamo, fechaDevolucion);
+        prestamos.add(prestamo);
+
+        System.out.println("Préstamo registrado exitosamente.");
+    }
+
+    private static void verPrestamos() {
+        if (prestamos.isEmpty()) {
+            System.out.println("No hay préstamos registrados.");
+        } else {
+            System.out.println("Lista de préstamos:");
+            for (Prestamo prestamo : prestamos) {
+                System.out.println(prestamo);
+            }
+        }
+    }
+}

@@ -8,7 +8,7 @@ public class StockBook{
         allBooks = new ArrayList<>();
         allBooks.add(new Book("It", "Stephen King", "Terror", 5));
         allBooks.add(new Book("Dracula", "Bram Stoker", "Terror", 5));
-        allBooks.add(new Book("Frankenstein", "Mary Shelley", "Terror", 5));
+        allBooks.add(new Book("Frankenstein", "Mary Shelley", "Terror", 5 ));
         allBooks.add(new Book("The Shinign", "Stephen King", "Terror", 5));
         allBooks.add(new Book("The Haunting of Hill House", "Shirley Jackson", "Terror", 5));
         allBooks.add(new Book("1984", "George Orwell", "Ficción", 5));
@@ -41,5 +41,9 @@ public class StockBook{
     //      Obtener libros
     public List<Book> getBooks() {
         return new ArrayList<>(allBooks);
+    }
+
+    public void addBook(Book book) {
+        allBooks.add(book);
     }
 }

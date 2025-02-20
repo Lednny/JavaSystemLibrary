@@ -50,6 +50,13 @@ public class Book {
         return stock;
     }
 
+    //Método para devolver un libro
+    public void devolver() {
+        stock++;  
+    }
 
-    
+    //Método para prestar un libro
+    public void prestar() {
+        stock--;
+    }
 }
