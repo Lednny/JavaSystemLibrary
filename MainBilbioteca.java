@@ -11,11 +11,11 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
 
     // Agregar clientes
     
-    
+
 }
 
     // Funcion < Ejecución de prestamo >
-
+/* 
     public void lendBook() {
         Scanner scanner = new Scanner(System.in);
         inicializarDatos();
@@ -91,44 +91,19 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
 
         System.out.println("Préstamo registrado exitosamente.");
     }
+*/
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//          ##//#//#    endregion   #\\#\\##
 
 
     // Funcion < Impresion de clientes >
     public static void printClients(List<Cliente> clientes) {
         for (int i = 0; i < clientes.size(); i++) {
             System.out.println(
-                    "-Cliente: " + clientes.get(i).getNombre() + "\n" + "Email: " + clientes.get(i).getEmail());
+                    "- Cliente: " + clientes.get(i).getNombre() + "\n" + "- Email: " + clientes.get(i).getEmail());
             System.out.println("");
         }
     }
@@ -147,13 +122,12 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
     }
 
     public static void main(String args[]) {
-        Cliente clientes = new Cliente();
+        List<Cliente> clientes = new ArrayList<>();
         StockBook stockB = new StockBook();
         String nombre;
         String email;
         String devolucion = "";
         String prestamo = "";
-        // Cliente nuevoUsuario = new Cliente("", "");
 
         // Variables
         Scanner input = new Scanner(System.in);
@@ -198,7 +172,7 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
                     email = input.nextLine();
                     System.out.println();
                     clientes.add(new Cliente(nombre, email));
-                    clientes.get(clientes.size() - 1).infoUser();
+                    //clientes.getCliente().get(clientes.getCliente().size());
                     System.out.println("Usuario añadido con éxito!");
                     Timer.main(null);
                     CleanScreen.CleanScreen();
@@ -207,8 +181,10 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
                 case 2: // <FUNCIONANDO>
                     // Variables del case 2
                     boolean encontrado = false;
+                    System.out.println("<TEST> - Pendiente la implementacion de la continacion <PRESTAMO>");
 
                     System.out.println("2. Búsqueda de Libro (Género, título o autor). ");
+                    System.out.println();
                     System.out.println("Generos disponibles: \n" + "-Terror. \n" + "-Comedia. \n" + "-Fantasia. \n"
                             + "-Ficción. \n" + "-Romance. \n" + "-Documentales. \n" + "-Infantiles. \n");
                     System.out.println("");
@@ -236,6 +212,7 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
                 case 3: // EN DESARROLLO <pendiente>
 
                     System.out.println("3. Devolución de Book ");
+                        System.out.println("<TEST> - EN DESARROLLO");
                     System.out.println();
                     System.out.println("Ingrese el nombre del libro a devolver: ");
                     devolucion = input.nextLine();
@@ -284,7 +261,9 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
                     printStock(stockB);
                     break;
 
-                case 6:
+                case 6:     // <FUNCIONANDO>
+                    System.out.println("6. Estatus de Usuarios/Clientes.");
+                    System.out.println();
                     System.out.println("Lista de clientes registrados:");
                     System.out.println();
                     System.out.println("Usuarios registrados: " + clientes.size() + "\n");

@@ -13,6 +13,11 @@ public class Cliente {
         stockC.add(new Cliente("Invitado", "invitado.mail"));
     }
 
+    public void addClient(Cliente cliente) {
+        stockC.add(cliente);
+    }
+
+
     //      Obtener clientes
     public List<Cliente> getCliente() {
         return new ArrayList<>(stockC);
@@ -43,9 +48,4 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-
-//    public String getClientes(){
-//        return List<Cliente> clientes;
-//    }
-
 }
