@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Prestamo{
     private Cliente cliente;
 
@@ -14,7 +12,7 @@ public class Prestamo{
     public void prestarLibro(Book libro, StockBook stock){
         if (cliente.getLibrosPrestados().size() < 2 ){
             if(libro.getStock() > 0){
-                libro.getBooks();
+                libro.lendBooks();
                 cliente.prestarLibro(libro);
                // libro.setStock(libro.getStock() - 1);
                // stock.updateBook(libro);

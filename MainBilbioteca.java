@@ -5,11 +5,12 @@ import java.util.Scanner;
 public class MainBilbioteca {
     static List<Cliente> clientes = new ArrayList<>();
 
-    //Función para préstamo
-   // private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
-   //     //Libros
-   //     stockB.getBooks();
-   // }
+    // Función para préstamo
+    // private static void inicializarDatos(StockBook stockB, List<Cliente>
+    // clientes) {
+    // //Libros
+    // stockB.getBooks();
+    // }
 
     public static Cliente buscarClientePorNombre() {
         Scanner input = new Scanner(System.in);
@@ -36,6 +37,7 @@ public class MainBilbioteca {
         }
         return null;
     }
+
     // Funcion < Impresion de clientes >
     public static void printClients(List<Cliente> clientes) {
         for (int i = 0; i < clientes.size(); i++) {
@@ -79,7 +81,7 @@ public class MainBilbioteca {
             System.out.println("-------------------------- Menú de la Biblioteca Virtual ----------------------------");
             System.out.println(">>>  ¿Qué deseas realizar?  <<<");
             System.out.println("1. Registro de Usuario ");
-            System.out.println("2. Búsqueda de Book "); // Despliega lista de Books - busqueda 
+            System.out.println("2. Búsqueda de Book "); // Despliega lista de Books - busqueda
             System.out.println("3. Préstamo de libro "); // Prestamo de libro
             System.out.println("4. Devolución de Book ");
             System.out.println();
@@ -109,7 +111,7 @@ public class MainBilbioteca {
                     email = input.nextLine();
                     System.out.println();
                     clientes.add(new Cliente(nombre, email));
-                    //clientes.getCliente().get(clientes.getCliente().size());
+                    // clientes.getCliente().get(clientes.getCliente().size());
                     System.out.println("Usuario añadido con éxito!");
                     Timer.main(null);
                     CleanScreen.CleanScreen();
@@ -210,7 +212,7 @@ public class MainBilbioteca {
                     printStock(stockB);
                     break;
 
-                case 7:     // <FUNCIONANDO>
+                case 7: // <FUNCIONANDO>
                     System.out.println("6. Estatus de Usuarios/Clientes.");
                     System.out.println();
                     System.out.println("Lista de clientes registrados:");

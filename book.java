@@ -56,7 +56,7 @@ public class Book {
     }
 
     //Método para prestar un libro
-    public void getBooks() {
+    public void lendBooks() {       // Cambio realizado para evitar confusiones
         stock--;
         
     }
