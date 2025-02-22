@@ -11,11 +11,11 @@ public class StockBook{
         allBooks.add(new Book("Frankenstein", "Mary Shelley", "Terror", 5 ));
         allBooks.add(new Book("The Shinign", "Stephen King", "Terror", 5));
         allBooks.add(new Book("The Haunting of Hill House", "Shirley Jackson", "Terror", 5));
-        allBooks.add(new Book("1984", "George Orwell", "Ficción", 5));
-        allBooks.add(new Book("Brave New World", "Aldous Huxley", "Ficción", 5));
-        allBooks.add(new Book("Fahrenheit 451", "Ray Bradbury", "Ficción", 5));
-        allBooks.add(new Book("The Great Gatsby", "F. Scott Fitzgerald", "Ficción", 5));
-        allBooks.add(new Book("To Kill a Mockingbird", "Harper Lee", "Ficción", 5));
+        allBooks.add(new Book("1984", "George Orwell", "Ficcion", 5));
+        allBooks.add(new Book("Brave New World", "Aldous Huxley", "Ficcion", 5));
+        allBooks.add(new Book("Fahrenheit 451", "Ray Bradbury", "Ficcion", 5));
+        allBooks.add(new Book("The Great Gatsby", "F. Scott Fitzgerald", "Ficcion", 5));
+        allBooks.add(new Book("To Kill a Mockingbird", "Harper Lee", "Ficcion", 5));
         allBooks.add(new Book("Pride and Prejudice", "Jane Austen", "Romance", 5));
         allBooks.add(new Book("Wuthering Heights", "Emily Brontë", "Romance", 5));
         allBooks.add(new Book("Jane Eyre", "Charlotte Brontë", "Romance", 5));

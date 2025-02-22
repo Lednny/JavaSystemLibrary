@@ -3,102 +3,39 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainBilbioteca {
-List<Cliente> clientes = new ArrayList<>();
-    // Funciones de soporte para < PRESTAMO >
-private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
-    //  Libros
-    stockB.getBooks();
+    static List<Cliente> clientes = new ArrayList<>();
 
-    // Agregar clientes
-    
+    //Función para préstamo
+   // private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
+   //     //Libros
+   //     stockB.getBooks();
+   // }
 
-}
-
-    // Funcion < Ejecución de prestamo >
-/* 
-    public void lendBook() {
-        Scanner scanner = new Scanner(System.in);
-        inicializarDatos();
-
-        while (true) {
-            System.out.println("Menú de opciones:");
-            System.out.println("1. Registrar préstamo");
-            System.out.println("2. Ver préstamos");
-            System.out.println("3. Salir");
-            System.out.print("Seleccione una opción: ");
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
-
-            switch (opcion) {
-                case 1:
-                    registrarPrestamo(scanner);
-                    break;
-                case 2:
-                    verPrestamos();
-                    break;
-                case 3:
-                    System.out.println("Saliendo del sistema...");
-                    return;
-                default:
-                    System.out.println("Opción no válida. Intente de nuevo.");
-                    break;
+    public static Cliente buscarClientePorNombre() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Ingrese el nombre del cliente: ");
+        String nombre = input.nextLine();
+        System.out.println("");
+        for (Cliente cliente : clientes) {
+            if (cliente.getNombre().toLowerCase().equalsIgnoreCase(nombre.toLowerCase())) {
+                return cliente;
             }
         }
+        return null;
     }
-    
-    private static void registrarPrestamo(Scanner scanner, List<Book> stockB) {
-        System.out.println("Lista de libros:");
-        for (int i = 0; i < stockB.size(); i++) {
-            System.out.println((i + 1) + ". " + stockB.get(i));
+
+    public static Book buscarLibroPorTitulo(StockBook stockB) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Ingrese el título del libro: ");
+        String titulo = input.nextLine();
+        System.out.println("");
+        for (Book book : stockB.getBooks()) {
+            if (book.getTitle().toLowerCase().equalsIgnoreCase(titulo.toLowerCase())) {
+                return book;
+            }
         }
-        System.out.print("Seleccione el número del libro a prestar: ");
-        int indiceLibro = scanner.nextInt() - 1;
-        scanner.nextLine();  // Consumir el salto de línea
-
-        if (indiceLibro < 0 || indiceLibro >= stockB.size()) {
-            System.out.println("Número de libro no válido.");
-            return;
-        }
-
-        Book libro = stockB.get(indiceLibro);
-        if (!libro.isDisponible()) {
-            System.out.println("El libro no está disponible.");
-            return;
-        }
-
-        System.out.println("Lista de clientes:");
-        for (int i = 0; i < clientes.size(); i++) {
-            System.out.println((i + 1) + ". " + clientes.get(i));
-        }
-        System.out.print("Seleccione el número del cliente: ");
-        int indiceCliente = scanner.nextInt() - 1;
-        scanner.nextLine();  // Consumir el salto de línea
-
-        if (indiceCliente < 0 || indiceCliente >= clientes.size()) {
-            System.out.println("Número de cliente no válido.");
-            return;
-        }
-
-        Cliente cliente = clientes.get(indiceCliente);
-
-        System.out.print("Ingrese la fecha de préstamo (YYYY-MM-DD): ");
-        String fechaPrestamo = scanner.nextLine();
-        System.out.print("Ingrese la fecha de devolución (YYYY-MM-DD): ");
-        String fechaDevolucion = scanner.nextLine();
-
-        Prestamo prestamo = new Prestamo(libro, cliente, fechaPrestamo, fechaDevolucion);
-        prestamos.add(prestamo);
-
-        System.out.println("Préstamo registrado exitosamente.");
+        return null;
     }
-*/
-
-
-
-
-//          ##//#//#    endregion   #\\#\\##
-
-
     // Funcion < Impresion de clientes >
     public static void printClients(List<Cliente> clientes) {
         for (int i = 0; i < clientes.size(); i++) {
@@ -127,7 +64,6 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
         String nombre;
         String email;
         String devolucion = "";
-        String prestamo = "";
 
         // Variables
         Scanner input = new Scanner(System.in);
@@ -143,15 +79,16 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
             System.out.println("-------------------------- Menú de la Biblioteca Virtual ----------------------------");
             System.out.println(">>>  ¿Qué deseas realizar?  <<<");
             System.out.println("1. Registro de Usuario ");
-            System.out.println("2. Búsqueda de Book "); // Despliega lista de Books - busqueda - opcion de prestamo
-            System.out.println("3. Devolución de Book ");
+            System.out.println("2. Búsqueda de Book "); // Despliega lista de Books - busqueda 
+            System.out.println("3. Préstamo de libro "); // Prestamo de libro
+            System.out.println("4. Devolución de Book ");
             System.out.println();
             System.out.println(">>>  Opciones de gestión  <<<");
             System.out.println();
-            System.out.println("4. Registro de nuevo Book. ");
-            System.out.println("5. Estado de inventario. "); // Impresion de stock
-            System.out.println("6. Estatus de Usuarios/Clientes.");
-            System.out.println("0. Cerrar programa.");
+            System.out.println("5. Registro de nuevo Book. ");
+            System.out.println("6. Estado de inventario. "); // Impresion de stock
+            System.out.println("7. Estatus de Usuarios/Clientes.");
+            System.out.println("8. Cerrar programa.");
             System.out.println();
             System.out
                     .println("---------------------------------------------------------------------------------------");
@@ -181,8 +118,6 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
                 case 2: // <FUNCIONANDO>
                     // Variables del case 2
                     boolean encontrado = false;
-                    System.out.println("<TEST> - Pendiente la implementacion de la continacion <PRESTAMO>");
-
                     System.out.println("2. Búsqueda de Libro (Género, título o autor). ");
                     System.out.println();
                     System.out.println("Generos disponibles: \n" + "-Terror. \n" + "-Comedia. \n" + "-Fantasia. \n"
@@ -209,10 +144,24 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
 
                     }
                     break;
-                case 3: // EN DESARROLLO <pendiente>
+
+                case 3: //
+                    System.out.println("3. Préstamo de libro ");
+                    System.out.println();
+                    Cliente cliente = buscarClientePorNombre();
+                    Book libro = buscarLibroPorTitulo(stockB);
+                    if (cliente != null && libro != null) {
+                        Prestamo prestamo = new Prestamo(cliente);
+                        prestamo.prestarLibro(libro, stockB);
+                    } else {
+                        System.out.println("No se encontró el cliente o el libro.");
+                    }
+                    break;
+
+                case 4: // EN DESARROLLO <pendiente>
 
                     System.out.println("3. Devolución de Book ");
-                        System.out.println("<TEST> - EN DESARROLLO");
+                    System.out.println("<TEST> - EN DESARROLLO");
                     System.out.println();
                     System.out.println("Ingrese el nombre del libro a devolver: ");
                     devolucion = input.nextLine();
@@ -231,7 +180,7 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
                     }
                     break;
 
-                case 4: // <FUNCIONANDO>
+                case 5: // <FUNCIONANDO>
                     System.out.println("4. Registro de nuevo Book");
                     System.out.println();
 
@@ -253,7 +202,7 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
                     System.out.println();
                     break;
 
-                case 5: // <FUNCIONANDO>
+                case 6: // <FUNCIONANDO>
                     System.out.println(">>    Estado de inventario    <<");
                     System.out.println();
                     System.out.println("Inventario de libros: ");
@@ -261,7 +210,7 @@ private static void inicializarDatos(StockBook stockB, List<Cliente> clientes) {
                     printStock(stockB);
                     break;
 
-                case 6:     // <FUNCIONANDO>
+                case 7:     // <FUNCIONANDO>
                     System.out.println("6. Estatus de Usuarios/Clientes.");
                     System.out.println();
                     System.out.println("Lista de clientes registrados:");

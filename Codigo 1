@@ -1,0 +1,39 @@
+//import java.util.ArrayList;
+//    import java.util.List;
+//
+//    public class Prestamo{
+//    private List<Book> libroPrestado;
+//    private Cliente cliente;
+//
+//    public Prestamo(Cliente cliente){
+//        this.cliente = cliente;
+//        this.libroPrestado = new ArrayList<>();
+//    }
+//
+//    public Cliente getCliente() {
+//        return cliente;
+//    }
+//
+//    public void agregarLibro(Book libro){
+//        if (libroPrestado.size() > 2){
+//            if(libro.getStock() > 0){
+//                libroPrestado.add(libro);
+//                System.out.println("Libro prestdo con éxito");
+//            } else {
+//                System.out.println("No hay stock disponible para este libro. ");
+//            }
+//        } else {
+//            System.out.println("Has alcanzado el límite de 2 libros prestados. ");
+//        }
+//    }
+//
+//    public void devolverLibro(Book libro){
+//        if(libroPrestado.contains(libro)){
+//            libro.devolver();
+//            libroPrestado.remove(libro);
+//            System.out.println("Libro devuelto con éxito");
+//        } else {
+//            System.out.println("El usuario" + cliente + "tienes este libro prestado. ");
+//        }
+//    }
+//}
