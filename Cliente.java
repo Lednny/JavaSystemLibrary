@@ -4,28 +4,17 @@ import java.util.List;
 public class Cliente {
     private String nombre;
     private String email;
+    private List<Book> librosPrestados;
 
-// Lista incicial de clientes
-    public List<Cliente> stockC;
-
-    public Cliente() {
-        stockC = new ArrayList<>();
-        stockC.add(new Cliente("Invitado", "invitado.mail"));
-    }
-
-    public void addClient(Cliente cliente) {
-        stockC.add(cliente);
-    }
-
-
-    //      Obtener clientes
-    public List<Cliente> getCliente() {
-        return new ArrayList<>(stockC);
+//Listado de préstamos a clientes
+    public Cliente(){
+        librosPrestados = new ArrayList<>();
     }
 
     public Cliente(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;
+        this.librosPrestados = new ArrayList<>();
     }
 
     public void infoUser() {
@@ -47,5 +36,17 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Book> getLibrosPrestados(){
+        return librosPrestados;
+    }
+
+    public void prestarLibro(Book libro){
+        librosPrestados.add(libro);
+    }
+
+    public void devolverLibro(Book libro){
+        librosPrestados.remove(libro);
     }
 }

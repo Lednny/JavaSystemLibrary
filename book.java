@@ -56,7 +56,8 @@ public class Book {
     }
 
     //Método para prestar un libro
-    public void prestar() {
+    public void getBooks() {
         stock--;
+        
     }
 }
