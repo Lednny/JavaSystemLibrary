@@ -29,6 +29,11 @@ public class Book {
 
     // METODOS
 
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+    
+
     public void infoBook() {
         System.out.println("Titulo: " + title);
         System.out.println("Autor:  " + author);
@@ -53,11 +58,5 @@ public class Book {
     //Método para devolver un libro
     public void devolver() {
         stock++;  
-    }
-
-    //Método para prestar un libro
-    public void lendBooks() {       // Cambio realizado para evitar confusiones
-        stock--;
-        
     }
 }

@@ -11,6 +11,15 @@ public class Cliente {
         librosPrestados = new ArrayList<>();
     }
 
+    // Mostrar lista de libros prestados
+    public void showLendBooks(){
+        for (Book libro : librosPrestados){
+            System.out.println(">> Título: " + libro.getTitle());
+            System.out.println(">> Autor: " + libro.getAuthor());
+            System.out.println();
+        }
+    }
+
     public Cliente(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;

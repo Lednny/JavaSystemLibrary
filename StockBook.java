@@ -9,7 +9,7 @@ public class StockBook{
         allBooks.add(new Book("It", "Stephen King", "Terror", 5));
         allBooks.add(new Book("Dracula", "Bram Stoker", "Terror", 5));
         allBooks.add(new Book("Frankenstein", "Mary Shelley", "Terror", 5 ));
-        allBooks.add(new Book("The Shinign", "Stephen King", "Terror", 5));
+        allBooks.add(new Book("The Shining", "Stephen King", "Terror", 5));
         allBooks.add(new Book("The Haunting of Hill House", "Shirley Jackson", "Terror", 5));
         allBooks.add(new Book("1984", "George Orwell", "Ficcion", 5));
         allBooks.add(new Book("Brave New World", "Aldous Huxley", "Ficcion", 5));
@@ -31,12 +31,22 @@ public class StockBook{
         allBooks.add(new Book("Educated", "Tara Westover", "Documentales", 5));
         allBooks.add(new Book("Hiroshima", "John Hersey", "Documentales", 5));
         allBooks.add(new Book("Breve Historia del Tiempo", "Stephen Hawking", "Documentales", 5));
-        allBooks.add(new Book("Charlie y la Fábrica de Chocolate", "Roald Dahl", "Infantiles", 5));
+        allBooks.add(new Book("Charlie y la Fabrica de Chocolate", "Roald Dahl", "Infantiles", 5));
         allBooks.add(new Book("El Principito", "Antoine de Saint-Exupéry", "Infantiles", 5));
         allBooks.add(new Book("Matilda", "Roald Dahl", "Infantiles", 5));
         allBooks.add(new Book("Donde Viven los Monstruos", "Maurice Sendak", "Infantiles", 5));
-        allBooks.add(new Book("Alicia en el País de las Maravillas", "Lewis Carroll", "Infantiles", 5));
+        allBooks.add(new Book("Alicia en el Pais de las Maravillas", "Lewis Carroll", "Infantiles", 5));
     }
+
+    public void updateBook(Book book) {
+        for (int i = 0; i < allBooks.size(); i++) {
+            if (allBooks.get(i).getTitle().equals(book.getTitle())) {
+                allBooks.set(i, book);
+                break;
+            }
+        }
+    }
+    
 
     //      Obtener libros
     public List<Book> getBooks() {

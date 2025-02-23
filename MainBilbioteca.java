@@ -5,12 +5,18 @@ import java.util.Scanner;
 public class MainBilbioteca {
     static List<Cliente> clientes = new ArrayList<>();
 
-    // Función para préstamo
-    // private static void inicializarDatos(StockBook stockB, List<Cliente>
-    // clientes) {
-    // //Libros
-    // stockB.getBooks();
-    // }
+    public static void prestamoLibro(List<Cliente> clientes, StockBook stockB) {
+        Cliente cliente = buscarClientePorNombre();
+        Book libro = buscarLibroPorTitulo(stockB);
+        if (cliente != null && libro != null) {
+            Prestamo prestamo = new Prestamo(cliente);
+            prestamo.prestarLibro(libro, stockB);
+        } else {
+            System.out.println("No se encontró el cliente o el libro.");
+            Timer.main(null);
+            CleanScreen.CleanScreen();
+        }
+    }
 
     public static Cliente buscarClientePorNombre() {
         Scanner input = new Scanner(System.in);
@@ -18,7 +24,7 @@ public class MainBilbioteca {
         String nombre = input.nextLine();
         System.out.println("");
         for (Cliente cliente : clientes) {
-            if (cliente.getNombre().toLowerCase().equalsIgnoreCase(nombre.toLowerCase())) {
+            if (cliente.getNombre().equalsIgnoreCase(nombre.toLowerCase())) {
                 return cliente;
             }
         }
@@ -31,7 +37,7 @@ public class MainBilbioteca {
         String titulo = input.nextLine();
         System.out.println("");
         for (Book book : stockB.getBooks()) {
-            if (book.getTitle().toLowerCase().equalsIgnoreCase(titulo.toLowerCase())) {
+            if (book.getTitle().equalsIgnoreCase(titulo.toLowerCase())) {
                 return book;
             }
         }
@@ -42,7 +48,10 @@ public class MainBilbioteca {
     public static void printClients(List<Cliente> clientes) {
         for (int i = 0; i < clientes.size(); i++) {
             System.out.println(
-                    "- Cliente: " + clientes.get(i).getNombre() + "\n" + "- Email: " + clientes.get(i).getEmail());
+                    "- Cliente: " + clientes.get(i).getNombre() + "\n" + "- Email: " + clientes.get(i).getEmail() + "\n" + "- Libros Prestados: " + clientes.get(i).getLibrosPrestados().size());
+            System.out.println();
+            System.out.println("Libros prestados: ");
+            clientes.get(i).showLendBooks();
             System.out.println("");
         }
     }
@@ -51,21 +60,22 @@ public class MainBilbioteca {
     public static void printStock(StockBook stockB) {
         List<Book> books = stockB.getBooks();
         for (Book book : books) {
-            System.out.println("Titulo: " + book.getTitle());
-            System.out.println("Autor: " + book.getAuthor());
-            System.out.println("Genero: " + book.getType());
-            System.out.println("Stock: " + book.getStock() + "\n");
+            System.out.println(">> Titulo: " + book.getTitle());
+            System.out.println(">> Autor: " + book.getAuthor());
+            System.out.println(">> Genero: " + book.getType());
+            System.out.println(">> Stock: " + book.getStock() + "\n");
 
         }
         System.out.println();
     }
 
     public static void main(String args[]) {
-        List<Cliente> clientes = new ArrayList<>();
+//        List<Cliente> clientes = new ArrayList<>();
         StockBook stockB = new StockBook();
         String nombre;
         String email;
-        String devolucion = "";
+        String devolucion;
+        int salir;
 
         // Variables
         Scanner input = new Scanner(System.in);
@@ -90,7 +100,7 @@ public class MainBilbioteca {
             System.out.println("5. Registro de nuevo Book. ");
             System.out.println("6. Estado de inventario. "); // Impresion de stock
             System.out.println("7. Estatus de Usuarios/Clientes.");
-            System.out.println("8. Cerrar programa.");
+            System.out.println("0. Cerrar programa.");
             System.out.println();
             System.out
                     .println("---------------------------------------------------------------------------------------");
@@ -103,7 +113,8 @@ public class MainBilbioteca {
 
             switch (taskChoise) {
                 case 1: // <FUNCIONANDO>
-                    System.out.println("1. Registro de Usuario ");
+                    System.out.println(">>    Registro de usuario    <<");
+                    System.out.println();
                     System.out.println("Ingrese el nombre del nuevo usuario: ");
                     input.nextLine();
                     nombre = input.nextLine();
@@ -111,7 +122,6 @@ public class MainBilbioteca {
                     email = input.nextLine();
                     System.out.println();
                     clientes.add(new Cliente(nombre, email));
-                    // clientes.getCliente().get(clientes.getCliente().size());
                     System.out.println("Usuario añadido con éxito!");
                     Timer.main(null);
                     CleanScreen.CleanScreen();
@@ -120,10 +130,10 @@ public class MainBilbioteca {
                 case 2: // <FUNCIONANDO>
                     // Variables del case 2
                     boolean encontrado = false;
-                    System.out.println("2. Búsqueda de Libro (Género, título o autor). ");
+                    System.out.println(">>    Busqueda de libro (título // género // autor)    <<");
                     System.out.println();
-                    System.out.println("Generos disponibles: \n" + "-Terror. \n" + "-Comedia. \n" + "-Fantasia. \n"
-                            + "-Ficción. \n" + "-Romance. \n" + "-Documentales. \n" + "-Infantiles. \n");
+                    System.out.println("Generos disponibles: \n" + "\n" + ">> Terror. \n" + "\n" + ">> Comedia. \n" + "\n" + ">> Fantasia. \n" + "\n" +
+                            ">> Ficción. \n" + "\n" + ">> Romance. \n" + "\n" + ">> Documentales. \n" + "\n" + ">> Infantiles. \n" + "\n");
                     System.out.println("");
 
                     input.nextLine();
@@ -148,42 +158,63 @@ public class MainBilbioteca {
                     break;
 
                 case 3: //
-                    System.out.println("3. Préstamo de libro ");
+                    System.out.println(">>    Préstamo de libro    <<");
                     System.out.println();
-                    Cliente cliente = buscarClientePorNombre();
-                    Book libro = buscarLibroPorTitulo(stockB);
-                    if (cliente != null && libro != null) {
-                        Prestamo prestamo = new Prestamo(cliente);
-                        prestamo.prestarLibro(libro, stockB);
-                    } else {
-                        System.out.println("No se encontró el cliente o el libro.");
+                    prestamoLibro(clientes, stockB);
+                    System.out.println();
+                    //Timer.main(null);
+                    CleanScreen.CleanScreen();
+                    System.out.println("Desea realizar otro préstamo?" + "\n" + "1. Sí" + "\n" + "2. No");
+                    System.out.println();
+                    int choise2 = input.nextInt();
+                    if (choise2 == 1) {
+                        prestamoLibro(clientes, stockB);
+                        break;
+                    }else if(choise2 == 2){
+                        System.out.println("Regresando al menú principal...");
+                        Timer.main(null);
+                        CleanScreen.CleanScreen();
+                        break;
                     }
+//                    Cliente cliente = buscarClientePorNombre();
+//                    Book libro = buscarLibroPorTitulo(stockB);
+//                    if (cliente != null && libro != null) {
+//                        Prestamo prestamo = new Prestamo(cliente);
+//                        prestamo.prestarLibro(libro, stockB);
+//                    } else {
+//                        System.out.println("No se encontró el cliente o el libro.");
+//                    }
                     break;
 
-                case 4: // EN DESARROLLO <pendiente>
+                case 4: // <FUNCIONANDO>
 
-                    System.out.println("3. Devolución de Book ");
-                    System.out.println("<TEST> - EN DESARROLLO");
+                    System.out.println(">>    Devolución de libro    <<");
                     System.out.println();
                     System.out.println("Ingrese el nombre del libro a devolver: ");
+                    input.nextLine();
                     devolucion = input.nextLine();
+                    System.out.println();
                     encontrado = false;
 
                     for (Book book : stockB.getBooks()) {
                         if (book.getTitle().toLowerCase().contains(devolucion.toLowerCase())) {
                             book.devolver();
-                            System.out.println("El libro" + book.getTitle() + " ha sido devuelto con éxito.");
+                            System.out.println("El libro " + devolucion + " ha sido devuelto con éxito.");
                             encontrado = true;
+                            Timer.main(null);
+                            CleanScreen.CleanScreen();
                             break;
                         }
                     }
                     if (!encontrado) {
                         System.out.println("No se encontró el libro.");
+                        Timer.main(null);
+                        CleanScreen.CleanScreen();
                     }
                     break;
 
                 case 5: // <FUNCIONANDO>
-                    System.out.println("4. Registro de nuevo Book");
+                    System.out.println(">>    Registro de nuevo libro    <<");
                     System.out.println();
 
                     System.out.println("Ingrese el título del libro: " + input.nextLine());
@@ -202,6 +233,8 @@ public class MainBilbioteca {
                     stockB.getBooks().get(stockB.getBooks().size() - 1).toString();
                     System.out.println("Libro añadido con éxito!");
                     System.out.println();
+                    Timer.main(null);
+                    CleanScreen.CleanScreen();
                     break;
 
                 case 6: // <FUNCIONANDO>
@@ -210,19 +243,35 @@ public class MainBilbioteca {
                     System.out.println("Inventario de libros: ");
                     System.out.println();
                     printStock(stockB);
+                    System.out.println();
+                    System.out.println(">> Presione 0 si desea salir al menú principal. ");
+                    salir = input.nextInt();
+                    if (salir == 0) {
+                    Timer.main(null);
+                    CleanScreen.CleanScreen();
+                        break;
+                    }
                     break;
 
                 case 7: // <FUNCIONANDO>
-                    System.out.println("6. Estatus de Usuarios/Clientes.");
-                    System.out.println();
-                    System.out.println("Lista de clientes registrados:");
+                    System.out.println(">>    Estatus de usuarios    <<");
                     System.out.println();
                     System.out.println("Usuarios registrados: " + clientes.size() + "\n");
                     printClients(clientes);
                     System.out.println("");
+                    System.out.println(">> Presione 0 si desea salir al menú principal. ");
+                    salir = input.nextInt();
+                    if (salir == 0) {
+                    Timer.main(null);
+                    CleanScreen.CleanScreen();
+                        break;
+                    }
+
                     break;
                 case 0:
                     System.out.println("Saliendo del programa... ");
+                    System.out.println();
+                    System.out.println("¡Hasta luego!");
                     continuar = false;
                     break;
                 default:

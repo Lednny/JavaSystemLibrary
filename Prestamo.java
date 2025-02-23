@@ -10,18 +10,25 @@ public class Prestamo{
     }
 
     public void prestarLibro(Book libro, StockBook stock){
-        if (cliente.getLibrosPrestados().size() < 2 ){
+        if (cliente.getLibrosPrestados().size() < 2){
             if(libro.getStock() > 0){
-                libro.lendBooks();
+                //libro.lendBooks();
                 cliente.prestarLibro(libro);
-               // libro.setStock(libro.getStock() - 1);
-               // stock.updateBook(libro);
+                libro.setStock(libro.getStock() - 1);
+                stock.updateBook(libro);
                 System.out.println("El libro: " + libro.getTitle() + " ha sido prestado a: " + cliente.getNombre());
+                Timer.main(null);
+                CleanScreen.CleanScreen();
             } else {
                 System.out.println("No hay stock disponible para el libro: " + libro.getTitle());
+                Timer.main(null);
+                CleanScreen.CleanScreen();
             }
+        } else {
+            System.out.println("El cliente ya tiene el número máximo de libros prestados.");
+            Timer.main(null);
+            CleanScreen.CleanScreen();
         }
     }
-
     
 }
