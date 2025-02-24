@@ -56,4 +56,8 @@ public class StockBook{
     public void addBook(Book book) {
         allBooks.add(book);
     }
+
+    public void removeBook(Book book) {
+        allBooks.remove(book);
+    }
 }

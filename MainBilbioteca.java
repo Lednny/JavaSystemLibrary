@@ -1,3 +1,4 @@
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -52,7 +53,8 @@ public class MainBilbioteca {
             System.out.println();
             System.out.println("Libros prestados: ");
             clientes.get(i).showLendBooks();
-            System.out.println("");
+            System.out .println();
+            System.out.println("-----------------------------------------------------------------------------------------------");
         }
     }
 
@@ -75,6 +77,7 @@ public class MainBilbioteca {
         String nombre;
         String email;
         String devolucion;
+        String clienteDevolucion;
         int salir;
 
         // Variables
@@ -82,7 +85,9 @@ public class MainBilbioteca {
         boolean continuar = true;
 
         // Menú
+        JOptionPane.showMessageDialog(null, "¡Hola, Bienvenido a la Biblioteca virtual de Java!", "Biblioteca Virtual", 1);
         System.out.println("¡Hola, Bienvenido a la Biblioteca virtual de Java!");
+
 
         System.out.println("");
 
@@ -157,7 +162,7 @@ public class MainBilbioteca {
                     }
                     break;
 
-                case 3: //
+                case 3: // <FUNCIONANDO>
                     System.out.println(">>    Préstamo de libro    <<");
                     System.out.println();
                     prestamoLibro(clientes, stockB);
@@ -176,30 +181,41 @@ public class MainBilbioteca {
                         CleanScreen.CleanScreen();
                         break;
                     }
-//                    Cliente cliente = buscarClientePorNombre();
-//                    Book libro = buscarLibroPorTitulo(stockB);
-//                    if (cliente != null && libro != null) {
-//                        Prestamo prestamo = new Prestamo(cliente);
-//                        prestamo.prestarLibro(libro, stockB);
-//                    } else {
-//                        System.out.println("No se encontró el cliente o el libro.");
-//                    }
                     break;
 
                 case 4: // <FUNCIONANDO>
 
                     System.out.println(">>    Devolución de libro    <<");
                     System.out.println();
-                    System.out.println("Ingrese el nombre del libro a devolver: ");
+                    System.out.println("Ingrese el nombre del cliente que desea devolver el libro: ");
                     input.nextLine();
+                    clienteDevolucion = input.nextLine();
+                    System.out.println();
+                    Cliente cliente = null;
+                    for (Cliente c: clientes) {
+                            if (c.getNombre().equalsIgnoreCase(clienteDevolucion.toLowerCase())) {
+                                cliente = c;
+                                break;
+                            }
+                    }
+
+                    if (cliente  == null) {
+                        System.out.println("No se encontró el cliente.");
+                        Timer.main(null);
+                        CleanScreen.CleanScreen();
+                        break;
+                    } 
+                    
+                    System.out.println("Ingrese el nombre del libro a devolver: ");
                     devolucion = input.nextLine();
                     System.out.println();
                     encontrado = false;
 
-                    for (Book book : stockB.getBooks()) {
-                        if (book.getTitle().toLowerCase().contains(devolucion.toLowerCase())) {
-                            book.devolver();
-                            System.out.println("El libro " + devolucion + " ha sido devuelto con éxito.");
+                    for (Book libroPrestado : cliente.getLibrosPrestados()) {
+                        if (libroPrestado.getTitle().toLowerCase().contains(devolucion.toLowerCase())) {
+                            libroPrestado.devolver();
+                            cliente.getLibrosPrestados().remove(libroPrestado);
+                            System.out.println("El libro " + devolucion + " prestado por el cliente " +  clienteDevolucion + " ha sido devuelto con éxito.");
                             encontrado = true;
                             Timer.main(null);
                             CleanScreen.CleanScreen();

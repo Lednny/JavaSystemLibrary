@@ -1,9 +1,0 @@
-//public static Cliente buscarClientePorNombre(List<Cliente> clientes, String nombre) {
-//        for (Cliente cliente : clientes) {
-//            if (cliente.getNombre().equals(nombre)) {
-//                return cliente;
-//            }
-//        }
-//        return null;
-//
-//    }
