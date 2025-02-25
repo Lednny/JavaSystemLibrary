@@ -118,13 +118,14 @@ public class MainBilbioteca {
 
             switch (taskChoise) {
                 case 1: // <FUNCIONANDO>
+                    JOptionPane.showMessageDialog(null, "Registro de usuario", "Biblioteca Virtual", 1);
                     System.out.println(">>    Registro de usuario    <<");
                     System.out.println();
-                    System.out.println("Ingrese el nombre del nuevo usuario: ");
-                    input.nextLine();
-                    nombre = input.nextLine();
-                    System.out.println("Ingrese el EMAIL del nuevo usuario: ");
-                    email = input.nextLine();
+                    nombre = JOptionPane.showInputDialog(null, "Ingresa el nombre del nuevo usuario", "Biblioteca Virtual", 3);
+                    System.out.println("Ingrese el nombre del nuevo usuario: \n" + nombre);
+                    System.out.println();
+                    email = JOptionPane.showInputDialog(null, "Ingresa el email del nuevo usuario", "Biblioteca Virtual", 3);
+                    System.out.println("Ingrese el EMAIL del nuevo usuario: \n" + email);
                     System.out.println();
                     clientes.add(new Cliente(nombre, email));
                     System.out.println("Usuario añadido con éxito!");
@@ -135,6 +136,7 @@ public class MainBilbioteca {
                 case 2: // <FUNCIONANDO>
                     // Variables del case 2
                     boolean encontrado = false;
+                    JOptionPane.showMessageDialog(null, ">>    Busqueda de libro (título // género // autor)    <<", "Biblioteca Virtual", 1);
                     System.out.println(">>    Busqueda de libro (título // género // autor)    <<");
                     System.out.println();
                     System.out.println("Generos disponibles: \n" + "\n" + ">> Terror. \n" + "\n" + ">> Comedia. \n" + "\n" + ">> Fantasia. \n" + "\n" +
@@ -157,18 +159,21 @@ public class MainBilbioteca {
                         }
                     }
                     if (!encontrado) {
+                        JOptionPane.showMessageDialog(null, "No se encontró el libro", "Biblioteca Virtual", 2);
                         System.out.println("No se encontró el libro.");
 
                     }
                     break;
 
                 case 3: // <FUNCIONANDO>
+                    JOptionPane.showMessageDialog(null, ">>    Préstamo de libro    <<", "Biblioteca Virtual", 1);
                     System.out.println(">>    Préstamo de libro    <<");
                     System.out.println();
                     prestamoLibro(clientes, stockB);
                     System.out.println();
                     //Timer.main(null);
                     CleanScreen.CleanScreen();
+                    //JOptionPane.showConfirmDialog(null, "Desea realizar otro préstamo?", "Biblioteca Virtual", taskChoise, 3);
                     System.out.println("Desea realizar otro préstamo?" + "\n" + "1. Sí" + "\n" + "2. No");
                     System.out.println();
                     int choise2 = input.nextInt();
