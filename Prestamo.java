@@ -16,16 +16,16 @@ public class Prestamo{
                 cliente.prestarLibro(libro);
                 libro.setStock(libro.getStock() - 1);
                 stock.updateBook(libro);
-                System.out.println("El libro: " + libro.getTitle() + " ha sido prestado a: " + cliente.getNombre());
+                System.out.println(AnsiColors.GREEN.TXT + "El libro: " + AnsiColors.RESET + libro.getTitle() + AnsiColors.GREEN.TXT +  " ha sido prestado a: " + AnsiColors.RESET + cliente.getNombre());
                 Timer.main(null);
                 CleanScreen.CleanScreen();
             } else {
-                System.out.println("No hay stock disponible para el libro: " + libro.getTitle());
+                System.out.println( AnsiColors.RED.TXT + "No hay stock disponible para el libro: " + AnsiColors.RESET + libro.getTitle());
                 Timer.main(null);
                 CleanScreen.CleanScreen();
             }
         } else {
-            System.out.println("El cliente ya tiene el número máximo de libros prestados.");
+            System.out.println(AnsiColors.RED.TXT + "El cliente ya tiene el número máximo de libros prestados." + AnsiColors.RESET);
             Timer.main(null);
             CleanScreen.CleanScreen();
         }

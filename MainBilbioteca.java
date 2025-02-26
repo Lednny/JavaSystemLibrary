@@ -64,8 +64,8 @@ public class MainBilbioteca {
         for (Book book : books) {
             System.out.println(AnsiColors.BLUE.TXT + ">> Titulo: " + AnsiColors.RESET + book.getTitle());
             System.out.println(AnsiColors.BLUE.TXT + ">> Autor: " + AnsiColors.RESET + book.getAuthor());
-            System.out.println(AnsiColors.BLUE.TXT + ">> Genero: " + AnsiColors.RESET + book.getType());
-            System.out.println(AnsiColors.BLUE.TXT + ">> Stock: " + AnsiColors.RESET + book.getStock() + "\n");
+            System.out.println(AnsiColors.BLUE.TXT + ">> Genero: " + AnsiColors.RESET + AnsiColors.RED.TXT +  book.getType() +  AnsiColors.RESET);
+            System.out.println(AnsiColors.BLUE.TXT + ">> Stock: " + AnsiColors.RESET + AnsiColors.RED.TXT  + book.getStock() +  AnsiColors.RESET + "\n");
 
         }
         System.out.println();
@@ -304,6 +304,8 @@ public class MainBilbioteca {
 
                     break;
                 case 0:
+                System.out.println();
+                System.out.println();
                     System.out.println(AnsiColors.GREEN.TXT + "Saliendo del programa... " + AnsiColors.RESET);
                     System.out.println();
                     Timer.main(null);
