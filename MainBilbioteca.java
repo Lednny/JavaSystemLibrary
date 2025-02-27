@@ -1,4 +1,3 @@
-import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +13,6 @@ public class MainBilbioteca {
             prestamo.prestarLibro(libro, stockB);
         } else {
             System.out.println( AnsiColors.RED.TXT + "No se encontró el cliente o el libro." + AnsiColors.RESET);
-            JOptionPane.showMessageDialog(null, "No se encontró el cliente o el libro.", "Biblioteca Virtual", 2);
             Timer.main(null);
             CleanScreen.CleanScreen();
         }
@@ -23,7 +21,7 @@ public class MainBilbioteca {
     public static Cliente buscarClientePorNombre() {
         Scanner input = new Scanner(System.in);
         System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente: " + AnsiColors.RESET);
-        String nombre = JOptionPane.showInputDialog(null, "      Ingresa el nombre del cliente:", "Biblioteca Virtual", 3);
+        String nombre = input.nextLine();
         System.out.println(nombre);
         System.out.println("");
         for (Cliente cliente : clientes) {
@@ -37,8 +35,7 @@ public class MainBilbioteca {
     public static Book buscarLibroPorTitulo(StockBook stockB) {
         Scanner input = new Scanner(System.in);
         System.out.println(AnsiColors.BLUE.TXT + "Ingrese el título del libro: " + AnsiColors.RESET);
-        String titulo = JOptionPane.showInputDialog(null, "         Ingrese el título del libro:", "Biblioteca Virtual", 3);
-        System.out.println(titulo);
+        String titulo = input.nextLine();
         System.out.println("");
         for (Book book : stockB.getBooks()) {
             if (book.getTitle().equalsIgnoreCase(titulo.toLowerCase())) {
@@ -134,7 +131,6 @@ public class MainBilbioteca {
                     System.out.println();
                     clientes.add(new Cliente(nombre, email));
                     System.out.println(AnsiColors.GREEN.TXT + "Usuario añadido con éxito!" + AnsiColors.RESET);
-                    JOptionPane.showMessageDialog(null, "    Usuario añadido con éxito!", "Biblioteca Virtual", 1);
                     Timer.main(null);
                     CleanScreen.CleanScreen();
                     break;
@@ -149,7 +145,7 @@ public class MainBilbioteca {
     
                     System.out.println("");
 
-                    String choise1 = JOptionPane.showInputDialog(null, " Ingresa el género que deseas consultar:", "Biblioteca Virtual", 3);
+                    String choise1 = input.nextLine();
                     String choise = choise1.toLowerCase();
                     System.out.println(choise1);
                     System.out.println(AnsiColors.INVERTIDO.TXT + "---------------------------------------------------------------------------------------" + AnsiColors.RESET);
@@ -205,7 +201,7 @@ public class MainBilbioteca {
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Devolución de libro    <<" + AnsiColors.RESET);
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente que desea devolver el libro: " + AnsiColors.RESET);
-                    clienteDevolucion = JOptionPane.showInputDialog(null, "      Ingresa el nombre del cliente:", "Biblioteca Virtual", 3);
+                    clienteDevolucion = input.nextLine();
                     System.out.println(clienteDevolucion);
                     System.out.println();
                     Cliente cliente = null;
@@ -217,7 +213,6 @@ public class MainBilbioteca {
                     }
 
                     if (cliente  == null) {
-                        JOptionPane.showMessageDialog(null, "   No se encontró el cliente.", "Biblioteca Virtual", 2);
                         System.out.println(AnsiColors.RED.TXT + "No se encontró el cliente." + AnsiColors.RESET);
                         Timer.main(null);
                         CleanScreen.CleanScreen();
@@ -225,8 +220,7 @@ public class MainBilbioteca {
                     } 
                     
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del libro a devolver: " + AnsiColors.RESET);
-                    devolucion = JOptionPane.showInputDialog(null, "Ingrese el nombre del libro a devolver:", "Biblioteca Virtual", 3);
-                    System.out.println(devolucion);
+                    devolucion = input.nextLine();
                     System.out.println();
                     encontrado = false;
 
@@ -234,7 +228,6 @@ public class MainBilbioteca {
                         if (libroPrestado.getTitle().toLowerCase().contains(devolucion.toLowerCase())) {
                             libroPrestado.devolver();
                             cliente.getLibrosPrestados().remove(libroPrestado);
-                            JOptionPane.showMessageDialog(null, "El libro " + devolucion + " prestado por el cliente " +  clienteDevolucion + " ha sido devuelto con éxito.", "Biblioteca Virtual", 1);
                             System.out.println(AnsiColors.GREEN.TXT + "El libro " + AnsiColors.RESET + devolucion + AnsiColors.GREEN.TXT + " prestado por el cliente " + AnsiColors.RESET +  clienteDevolucion + AnsiColors.GREEN.TXT + " ha sido devuelto con éxito." + AnsiColors.RESET);
                             encontrado = true;
                             Timer.main(null);
@@ -243,7 +236,6 @@ public class MainBilbioteca {
                         }
                     }
                     if (!encontrado) {
-                        JOptionPane.showMessageDialog(null, "     No se encontró el libro.", "Biblioteca Virtual", 2);
                         System.out.println(AnsiColors.RED.TXT + "No se encontró el libro." + AnsiColors.RESET);
                         Timer.main(null);
                         CleanScreen.CleanScreen();
@@ -254,28 +246,22 @@ public class MainBilbioteca {
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Registro de nuevo libro    <<" + AnsiColors.RESET);
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + " Ingrese el título del libro: " +  AnsiColors.RESET + input.nextLine());
-                    String title = JOptionPane.showInputDialog(null, "     Ingrese el título del libro:", "Biblioteca Virtual", 3);
-                    System.out.println(title);
+                    String title = input.nextLine();
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el autor del libro: " + AnsiColors.RESET);
-                    String author = JOptionPane.showInputDialog(null, "     Ingrese el autor del libro:", "Biblioteca Virtual", 3);
-                    System.out.println(author);
+                    String author = input.nextLine();
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el género del libro: " + AnsiColors.RESET);
-                    String type = JOptionPane.showInputDialog(null, "     Ingrese el género del libro:", "Biblioteca Virtual", 3);
-                    System.out.println(type);
+                    String type = input.nextLine();
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el stock del libro: " + AnsiColors.RESET);
-                    String stock = (JOptionPane.showInputDialog(null, "     Ingrese el stock del libro:", "Biblioteca Virtual", 3));
-                    int stock1 = Integer.parseInt(stock);
-                    System.out.println(stock1);
+                    int stock1 = input.nextInt();
                     System.out.println();
 
 
                     stockB.addBook(new Book(title, author, type, stock1));
                     stockB.getBooks().get(stockB.getBooks().size() - 1).toString();
                     System.out.println(AnsiColors.GREEN.TXT + "Libro añadido con éxito!" + AnsiColors.RESET);
-                    JOptionPane.showMessageDialog(null, "          Libro añadido con éxito!", "Biblioteca Virtual", 1);
                     System.out.println();
                     Timer.main(null);
                     CleanScreen.CleanScreen();
@@ -323,7 +309,6 @@ public class MainBilbioteca {
                     break;
                 default:
                     System.out.println(AnsiColors.RED.TXT + "Opción no válida, intentelo de nuevo. " + AnsiColors.RESET);
-                    JOptionPane.showMessageDialog(null, "       ¡Hasta luego!", "Biblioteca Virtual", 2);
                     break;
             }
         }
