@@ -3,6 +3,92 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainBilbioteca {
+
+    public static void addNewBook(List<Book> books, StockBook stockB, Scanner input, String title, String author, Scanner scanner) {
+        if (stockB.getBooks().size() > 0) {
+            boolean found = false;
+        
+            for (Book book : stockB.getBooks()) {
+                if (book.getTitle().equalsIgnoreCase(title) && book.getAuthor().equalsIgnoreCase(author)) {
+                    System.out.println(AnsiColors.RED.TXT + "El libro ya existe en el inventario." + AnsiColors.RESET);
+                    found = true;
+                    Timer.main(null);
+                    System.out.println();
+                    System.out.println( AnsiColors.BLUE.TXT + "¿Desea añadir mas stock a este libro? \n (1) - Si \n (2) - No" + AnsiColors.RESET);
+                    int addChoise = input.nextInt();
+
+                    if (addChoise == 1) {
+                        System.out.println( AnsiColors.BLUE.TXT + "Ingrese la cantidad a añadir a stock: " + AnsiColors.RESET);
+                        int add1 = input.nextInt();
+                        book.setStock(book.getStock() + add1);
+                        System.out.println(AnsiColors.GREEN.TXT + "Stock actualizado con éxito" + AnsiColors.RESET);
+                        Timer.main(null);
+                        CleanScreen.CleanScreen();
+                        return;
+                    } else if(addChoise == 2){
+                        System.out.println( AnsiColors.RED.TXT + "Saliendo..." + AnsiColors.RESET);
+                        Timer.main(null);
+                        CleanScreen.CleanScreen();
+                        return;
+                    }
+
+                    System.out.println();
+                    
+                    break;
+                }
+            }
+        
+            if (!found) {
+                System.out.println(AnsiColors.BLUE.TXT + "Ingrese el género del libro: " + AnsiColors.RESET);
+                String type = input.nextLine();
+                System.out.println();
+                System.out.println(AnsiColors.BLUE.TXT + "Ingrese el stock del libro: " + AnsiColors.RESET);
+                int stock1 = input.nextInt();
+                input.nextLine(); 
+                System.out.println();
+                stockB.addBook(new Book(title, author, type, stock1));
+                System.out.println(AnsiColors.GREEN.TXT + "Libro añadido con éxito!" + AnsiColors.RESET);
+                Timer.main(null);
+                CleanScreen.CleanScreen();
+            }
+        } else {
+            System.out.println(AnsiColors.BLUE.TXT + "Ingrese el género del libro: " + AnsiColors.RESET);
+            String type = input.nextLine();
+            System.out.println();
+            System.out.println(AnsiColors.BLUE.TXT + "Ingrese el stock del libro: " + AnsiColors.RESET);
+            int stock1 = input.nextInt();
+            input.nextLine(); 
+            System.out.println();
+            stockB.addBook(new Book(title, author, type, stock1));
+            System.out.println(AnsiColors.GREEN.TXT + "Libro añadido con éxito!" + AnsiColors.RESET);
+            Timer.main(null);
+            CleanScreen.CleanScreen();
+        }
+        
+        }
+
+    public static void userRegist(String nombre, String email, Scanner input) {
+        System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del nuevo usuario: \n" + AnsiColors.RED.TXT + "Si desea cancelar la operación, presione Enter (procure que la celda este vacía.)" + AnsiColors.RESET);
+        input.nextLine();
+        nombre = input.nextLine();//
+        if(nombre.trim().isEmpty()){
+            System.out.println(AnsiColors.RED.TXT + "Saliendo..." + AnsiColors.RESET);
+            Timer.main(null);
+            CleanScreen.CleanScreen();
+            return;
+        } else {
+            System.out.println();
+            System.out.println(AnsiColors.BLUE.TXT + "Ingrese el EMAIL del nuevo usuario: \n" + AnsiColors.RESET);
+            email = input.nextLine();
+            System.out.println();
+            clientes.add(new Cliente(nombre, email));
+            System.out.println(AnsiColors.GREEN.TXT + "Usuario añadido con éxito!" + AnsiColors.RESET);
+            Timer.main(null);
+            CleanScreen.CleanScreen();
+        }
+    }
+
+
     static List<Cliente> clientes = new ArrayList<>();
 
     public static void prestamoLibro(List<Cliente> clientes, StockBook stockB) {
@@ -73,8 +159,8 @@ public class MainBilbioteca {
     public static void main(String args[]) {
 //        List<Cliente> clientes = new ArrayList<>();
         StockBook stockB = new StockBook();
-        String nombre;
-        String email;
+        String nombre = "";
+        String email = "";
         String devolucion;
         String clienteDevolucion;
         int salir;
@@ -121,19 +207,8 @@ public class MainBilbioteca {
                 case 1: // <FUNCIONANDO>
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Registro de usuario    <<" + AnsiColors.RESET);
                     System.out.println();
-                    System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del nuevo usuario: \n" + AnsiColors.RESET);
-                    input.nextLine();
-                    nombre = input.nextLine();
-                    System.out.println();
-                    System.out.println(AnsiColors.BLUE.TXT + "Ingrese el EMAIL del nuevo usuario: \n" + AnsiColors.RESET);
-                    email = input.nextLine();
-                    System.out.println();
-                    clientes.add(new Cliente(nombre, email));
-                    System.out.println(AnsiColors.GREEN.TXT + "Usuario añadido con éxito!" + AnsiColors.RESET);
-                    Timer.main(null);
-                    CleanScreen.CleanScreen();
+                    userRegist(nombre, email, input);
                     break;
-
                 case 2: // <FUNCIONANDO>
                     // Variables del case 2
                     boolean encontrado = false;
@@ -244,26 +319,14 @@ public class MainBilbioteca {
                 case 5: // <FUNCIONANDO>
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Registro de nuevo libro    <<" + AnsiColors.RESET);
                     System.out.println();
-
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el título del libro: " +  AnsiColors.RESET + input.nextLine());
                     String title = input.nextLine();
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el autor del libro: " + AnsiColors.RESET);
                     String author = input.nextLine();
                     System.out.println();
-                    System.out.println(AnsiColors.BLUE.TXT + "Ingrese el género del libro: " + AnsiColors.RESET);
-                    String type = input.nextLine();
-                    System.out.println();
-                    System.out.println(AnsiColors.BLUE.TXT + "Ingrese el stock del libro: " + AnsiColors.RESET);
-                    int stock1 = input.nextInt();
-                    System.out.println();
-                    stockB.addBook(new Book(title, author, type, stock1));
-                    stockB.getBooks().get(stockB.getBooks().size() - 1).toString();
-                    System.out.println(AnsiColors.GREEN.TXT + "Libro añadido con éxito!" + AnsiColors.RESET);
-                    System.out.println();
-                    Timer.main(null);
-                    CleanScreen.CleanScreen();
-                    break;
+                    addNewBook(null, stockB, input, title, author, input);
+                        break;
 
                 case 6: // <FUNCIONANDO>
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Estado de inventario    <<" + AnsiColors.RESET);
