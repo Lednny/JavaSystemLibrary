@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 public class MainBilbioteca {
     static List<Cliente> clientes = new ArrayList<>();
+    static ArrayList<Book> LibrosIguales = new ArrayList<>();
+    static ArrayList<Cliente> UsuariosIguales = new ArrayList<>();
 
     public static void prestamoLibro(List<Cliente> clientes, StockBook stockB) {
-        Cliente cliente = buscarClientePorNombre();
-        Book libro = buscarLibroPorTitulo(stockB);
+        Cliente cliente = buscarClientePorNombre(UsuariosIguales);
+        Book libro = buscarLibroPorTitulo(stockB, LibrosIguales);
         if (cliente != null && libro != null) {
             Prestamo prestamo = new Prestamo(cliente);
             prestamo.prestarLibro(libro, stockB);
@@ -18,7 +20,7 @@ public class MainBilbioteca {
         }
     }
 
-    public static Cliente buscarClientePorNombre() {
+    public static Cliente buscarClientePorNombre(ArrayList<Cliente> UsuariosIguales) {
         Scanner input = new Scanner(System.in);
         System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente: " + AnsiColors.RESET);
         String nombre = input.nextLine();
@@ -26,23 +28,48 @@ public class MainBilbioteca {
         System.out.println("");
         for (Cliente cliente : clientes) {
             if (cliente.getNombre().equalsIgnoreCase(nombre.toLowerCase())) {
-                return cliente;
+                UsuariosIguales.add(cliente);
             }
         }
-        return null;
+        if(UsuariosIguales.size() == 1){
+            return UsuariosIguales.get(0);
+        }else{
+            System.out.println("Se han encontrado las siguientes coincidencias:");
+            for(int i = 0; i < UsuariosIguales.size(); i++){
+                int x = i + 1;
+                System.out.println(x + ".- Nombre: " + UsuariosIguales.get(i).getNombre() + " / Mail: " + UsuariosIguales.get(i).getEmail());
+            }
+            System.out.println("Seleccione el usuario: ");
+            //input.nextInt(); //Limpiar buffer
+            int eleccion = input.nextInt();
+            return UsuariosIguales.get(eleccion-1);
+        }
+        //return null;
     }
 
-    public static Book buscarLibroPorTitulo(StockBook stockB) {
+    public static Book buscarLibroPorTitulo(StockBook stockB, ArrayList<Book> LibrosIguales) {
         Scanner input = new Scanner(System.in);
         System.out.println(AnsiColors.BLUE.TXT + "Ingrese el título del libro: " + AnsiColors.RESET);
         String titulo = input.nextLine();
         System.out.println("");
         for (Book book : stockB.getBooks()) {
             if (book.getTitle().equalsIgnoreCase(titulo.toLowerCase())) {
-                return book;
+                LibrosIguales.add(book);
             }
         }
-        return null;
+        if(LibrosIguales.size() == 1){
+            return LibrosIguales.get(0);
+        }else{
+            System.out.println("Se han encontrado las siguientes coincidencias:");
+            for(int i = 0; i < LibrosIguales.size(); i++){
+                int x = i + 1;
+                System.out.println(x + ".- Título: " + LibrosIguales.get(i).getTitle() + " / Autor: " + LibrosIguales.get(i).getAuthor() + " / Genero:" + LibrosIguales.get(i).getType());
+            }
+            System.out.println("Seleccione el libro: ");
+            //input.nextInt(); //Limpiar buffer
+            int eleccion = input.nextInt();
+            return LibrosIguales.get(eleccion-1);
+        }
     }
 
     // Funcion < Impresion de clientes >
