@@ -22,7 +22,6 @@ public class MainBilbioteca {
         Scanner input = new Scanner(System.in);
         System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente: " + AnsiColors.RESET);
         String nombre = input.nextLine();
-        //System.out.println(nombre);
         System.out.println("");
         for (Cliente cliente : clientes) {
             if (cliente.getNombre().equalsIgnoreCase(nombre.toLowerCase())) {
@@ -123,7 +122,7 @@ public class MainBilbioteca {
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Registro de usuario    <<" + AnsiColors.RESET);
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del nuevo usuario: \n" + AnsiColors.RESET);
-                    input.nextLine(); //Limpiar buffer
+                    input.nextLine();
                     nombre = input.nextLine();
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el EMAIL del nuevo usuario: \n" + AnsiColors.RESET);
@@ -140,13 +139,14 @@ public class MainBilbioteca {
                     boolean encontrado = false;
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Busqueda de libro (título // género // autor)    <<" + AnsiColors.RESET);
                     System.out.println();
-                    System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre, género o autor del libro:" + AnsiColors.RESET);
-                    input.nextLine(); //Limpiar buffer
-                    System.out.println();
+                    System.out.println( AnsiColors.BLUE.TXT + "Generos disponibles:" + AnsiColors.RESET + "\n" + "\n" + ">> Terror. \n" + "\n" + ">> Comedia. \n" + "\n" + ">> Fantasia. \n" + "\n" +
+                            ">> Ficción. \n" + "\n" + ">> Romance. \n" + "\n" + ">> Documentales. \n" + "\n" + ">> Infantiles. \n" + "\n");
+                    System.out.println("");
+
+                    input.nextLine();
+
                     String choise1 = input.nextLine();
                     String choise = choise1.toLowerCase();
-                    //System.out.println(choise1);
-                    System.out.println(AnsiColors.INVERTIDO.TXT + "---------------------------------------------------------------------------------------" + AnsiColors.RESET);
                     System.out.println();
 
                     for (Book book : stockB.getBooks()) {
@@ -155,7 +155,7 @@ public class MainBilbioteca {
                                 || book.getAuthor().toLowerCase().contains(choise)) {
                             System.out.println("");
                             System.out.println(AnsiColors.BLUE.TXT + "                           Libro encontrado: " + AnsiColors.RESET + AnsiColors.YELLOW.TXT + book.getTitle() + AnsiColors.RESET + "\n" + "                           >> Autor: "
-                                    + book.getAuthor() + "\n" + "                           >> Género: " + book.getType() + "\n" + "                           >> Stock: " + book.getStock() + "\n");
+                                    + book.getAuthor() + "\n" + "                           >> Género: " + book.getType() + "\n");
                             encontrado = true;
                         }
                     }
@@ -165,7 +165,6 @@ public class MainBilbioteca {
                         CleanScreen.CleanScreen();
                     }
                     if(encontrado){
-                        System.out.println("");
                         System.out.println(AnsiColors.RED.TXT + ">> Presione 0 si desea salir al menú principal. " + AnsiColors.RESET);
                         salir = input.nextInt();
                         if (salir == 0) {
@@ -201,9 +200,8 @@ public class MainBilbioteca {
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Devolución de libro    <<" + AnsiColors.RESET);
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente que desea devolver el libro: " + AnsiColors.RESET);
-                    input.nextLine(); //Limpiar buffer
+                    input.nextLine();
                     clienteDevolucion = input.nextLine();
-                    //System.out.println(clienteDevolucion);
                     System.out.println();
                     Cliente cliente = null;
                     for (Cliente c: clientes) {
@@ -246,7 +244,8 @@ public class MainBilbioteca {
                 case 5: // <FUNCIONANDO>
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Registro de nuevo libro    <<" + AnsiColors.RESET);
                     System.out.println();
-                    System.out.println(AnsiColors.BLUE.TXT + " Ingrese el título del libro: " +  AnsiColors.RESET + input.nextLine());
+
+                    System.out.println(AnsiColors.BLUE.TXT + "Ingrese el título del libro: " +  AnsiColors.RESET + input.nextLine());
                     String title = input.nextLine();
                     System.out.println();
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el autor del libro: " + AnsiColors.RESET);
@@ -258,8 +257,6 @@ public class MainBilbioteca {
                     System.out.println(AnsiColors.BLUE.TXT + "Ingrese el stock del libro: " + AnsiColors.RESET);
                     int stock1 = input.nextInt();
                     System.out.println();
-
-
                     stockB.addBook(new Book(title, author, type, stock1));
                     stockB.getBooks().get(stockB.getBooks().size() - 1).toString();
                     System.out.println(AnsiColors.GREEN.TXT + "Libro añadido con éxito!" + AnsiColors.RESET);
