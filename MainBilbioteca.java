@@ -21,6 +21,7 @@ public class MainBilbioteca {
     }
 
     public static Cliente buscarClientePorNombre(ArrayList<Cliente> UsuariosIguales) {
+        UsuariosIguales.clear();
         Scanner input = new Scanner(System.in);
         System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente: " + AnsiColors.RESET);
         String nombre = input.nextLine();
@@ -48,6 +49,7 @@ public class MainBilbioteca {
     }
 
     public static Book buscarLibroPorTitulo(StockBook stockB, ArrayList<Book> LibrosIguales) {
+        LibrosIguales.clear();
         Scanner input = new Scanner(System.in);
         System.out.println(AnsiColors.BLUE.TXT + "Ingrese el título del libro: " + AnsiColors.RESET);
         String titulo = input.nextLine();
