@@ -12,7 +12,6 @@ public class Prestamo{
     public void prestarLibro(Book libro, StockBook stock){
         if (cliente.getLibrosPrestados().size() < 2){
             if(libro.getStock() > 0){
-                //libro.lendBooks();
                 cliente.prestarLibro(libro);
                 libro.setStock(libro.getStock() - 1);
                 stock.updateBook(libro);
@@ -29,6 +28,5 @@ public class Prestamo{
             Timer.main(null);
             CleanScreen.CleanScreen();
         }
-    }
-    
+    } 
 }

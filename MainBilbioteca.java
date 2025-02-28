@@ -93,38 +93,59 @@ public class MainBilbioteca {
 
     public static void prestamoLibro(List<Cliente> clientes, StockBook stockB) {
         Cliente cliente = buscarClientePorNombre();
-        Book libro = buscarLibroPorTitulo(stockB);
-        if (cliente != null && libro != null) {
-            Prestamo prestamo = new Prestamo(cliente);
-            prestamo.prestarLibro(libro, stockB);
-        } else {
-            System.out.println( AnsiColors.RED.TXT + "No se encontró el cliente o el libro." + AnsiColors.RESET);
-            Timer.main(null);
-            CleanScreen.CleanScreen();
-        }
-    }
-
-    public static Cliente buscarClientePorNombre() {
-        Scanner input = new Scanner(System.in);
-        System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente: " + AnsiColors.RESET);
-        String nombre = input.nextLine();
-        System.out.println("");
-        for (Cliente cliente : clientes) {
-            if (cliente.getNombre().equalsIgnoreCase(nombre.toLowerCase())) {
-                return cliente;
+        if (cliente != null) {
+            Book libro = buscarLibroPorTituloYAutor(stockB);
+            if (libro != null) {
+                Prestamo prestamo = new Prestamo(cliente);
+                prestamo.prestarLibro(libro, stockB);
+            } else {
+                System.out.println(AnsiColors.RED.TXT + "No se encontró el libro." + AnsiColors.RESET);
             }
+        } else {
+            System.out.println(AnsiColors.RED.TXT + "No se encontró el cliente." + AnsiColors.RESET);
         }
-        return null;
+        Timer.main(null);
+        CleanScreen.CleanScreen();
     }
 
-    public static Book buscarLibroPorTitulo(StockBook stockB) {
+    public static Book buscarLibroPorTituloYAutor(StockBook stockB) {
         Scanner input = new Scanner(System.in);
         System.out.println(AnsiColors.BLUE.TXT + "Ingrese el título del libro: " + AnsiColors.RESET);
         String titulo = input.nextLine();
-        System.out.println("");
+        System.out.println();
+        List<Book> librosEncontrados = new ArrayList<>();
         for (Book book : stockB.getBooks()) {
-            if (book.getTitle().equalsIgnoreCase(titulo.toLowerCase())) {
-                return book;
+            if (book.getTitle().equalsIgnoreCase(titulo)) {
+                librosEncontrados.add(book);
+            }
+        }
+        if (librosEncontrados.size() == 0) {
+            return null;
+        } else if (librosEncontrados.size() == 1) {
+            return librosEncontrados.get(0);
+        } else {
+            System.out.println(AnsiColors.BLUE.TXT + "Se encontraron varios libros con el mismo título. Ingrese el nombre del autor: " + AnsiColors.RESET);
+            String autor = input.nextLine();
+            System.out.println();
+            for (Book book : librosEncontrados) {
+                if (book.getAuthor().equalsIgnoreCase(autor)) {
+                    return book;
+                }
+            }
+            return null;
+        }
+    }
+
+
+    public static Cliente buscarClientePorNombre() {
+        Scanner input = new Scanner(System.in);
+        System.out.println(AnsiColors.RED.TXT + "Si desea cancelar la operación, presione Enter (procure que la celda este vacía.)" + AnsiColors.RESET);
+        System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente: " + AnsiColors.RESET);
+        String nombre = input.nextLine();
+        System.out.println();
+        for (Cliente cliente : clientes) {
+            if (cliente.getNombre().equalsIgnoreCase(nombre.toLowerCase())) {
+                return cliente;
             }
         }
         return null;
@@ -161,7 +182,7 @@ public class MainBilbioteca {
         StockBook stockB = new StockBook();
         String nombre = "";
         String email = "";
-        String devolucion;
+
         String clienteDevolucion;
         int salir;
 
@@ -214,14 +235,20 @@ public class MainBilbioteca {
                     boolean encontrado = false;
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Busqueda de libro (título // género // autor)    <<" + AnsiColors.RESET);
                     System.out.println();
-                    System.out.println( AnsiColors.BLUE.TXT + "Generos disponibles:" + AnsiColors.RESET + "\n" + "\n" + ">> Terror. \n" + "\n" + ">> Comedia. \n" + "\n" + ">> Fantasia. \n" + "\n" +
-                            ">> Ficción. \n" + "\n" + ">> Romance. \n" + "\n" + ">> Documentales. \n" + "\n" + ">> Infantiles. \n" + "\n");
+                    System.out.println( AnsiColors.BLUE.TXT + "Generos disponibles: \n" + AnsiColors.RED.TXT + "Si desea cancelar la operación, presione Enter (procure que la celda este vacía.)" + AnsiColors.RESET + "\n" + "\n" + ">> Terror. \n" + "\n" + ">> Comedia. \n" + "\n" + ">> Fantasia. \n" + "\n" +
+                    ">> Ficción. \n" + "\n" + ">> Romance. \n" + "\n" + ">> Documentales. \n" + "\n" + ">> Infantiles. \n" + "\n");
                     System.out.println("");
 
                     input.nextLine();
 
                     String choise1 = input.nextLine();
                     String choise = choise1.toLowerCase();
+                    if(choise1.trim().isEmpty()){
+                    System.out.println(AnsiColors.RED.TXT + "Saliendo..." + AnsiColors.RESET);
+                    Timer.main(null);
+                    CleanScreen.CleanScreen();
+                    continue;
+                    } else {
                     System.out.println();
 
                     for (Book book : stockB.getBooks()) {
@@ -248,12 +275,14 @@ public class MainBilbioteca {
                             break;
                         }
                     }
+                }
                     break;
 
                 case 3: // <FUNCIONANDO>
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Préstamo de libro    <<" + AnsiColors.RESET);
                     System.out.println();
                     prestamoLibro(clientes, stockB);
+                    System.out.println();
                     System.out.println();
                     //Timer.main(null);
                     CleanScreen.CleanScreen();
@@ -270,51 +299,92 @@ public class MainBilbioteca {
                         break;
                     }
                     break;
+                
 
                 case 4: // <FUNCIONANDO>
-                    System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Devolución de libro    <<" + AnsiColors.RESET);
-                    System.out.println();
-                    System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente que desea devolver el libro: " + AnsiColors.RESET);
-                    input.nextLine();
-                    clienteDevolucion = input.nextLine();
-                    System.out.println();
-                    Cliente cliente = null;
-                    for (Cliente c: clientes) {
-                            if (c.getNombre().equalsIgnoreCase(clienteDevolucion.toLowerCase())) {
-                                cliente = c;
-                                break;
-                            }
-                    }
-
-                    if (cliente  == null) {
-                        System.out.println(AnsiColors.RED.TXT + "No se encontró el cliente." + AnsiColors.RESET);
-                        Timer.main(null);
-                        CleanScreen.CleanScreen();
+                System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Devolución de libro    <<" + AnsiColors.RESET);
+                System.out.println();
+                
+                System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente que desea devolver el libro: \n" +
+                        AnsiColors.RED.TXT + "Si desea cancelar la operación, presione Enter (procure que la celda esté vacía.)" + AnsiColors.RESET);
+                input.nextLine();
+                clienteDevolucion = input.nextLine();
+                
+                if (clienteDevolucion.trim().isEmpty()) {
+                    System.out.println(AnsiColors.RED.TXT + "Saliendo..." + AnsiColors.RESET);
+                    Timer.main(null);
+                    CleanScreen.CleanScreen();
+                    continue;
+                }
+            
+                Cliente cliente = null;
+                for (Cliente c : clientes) {
+                    if (c.getNombre().equalsIgnoreCase(clienteDevolucion.toLowerCase())) {
+                        cliente = c;
                         break;
-                    } 
-                    
-                    System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del libro a devolver: " + AnsiColors.RESET);
-                    devolucion = input.nextLine();
+                    }
+                }
+            
+                if (cliente == null) {
+                    System.out.println(AnsiColors.RED.TXT + "No se encontró el cliente." + AnsiColors.RESET);
+                    Timer.main(null);
+                    CleanScreen.CleanScreen();
+                    break;
+                }
+            
+                System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del libro a devolver: " + AnsiColors.RESET);
+                String tituloDevolucion = input.nextLine();
+                System.out.println();
+            
+                List<Book> librosCoincidentes = new ArrayList<>();
+                for (Book libroPrestado : cliente.getLibrosPrestados()) {
+                    if (libroPrestado.getTitle().equalsIgnoreCase(tituloDevolucion)) {
+                        librosCoincidentes.add(libroPrestado);
+                    }
+                }
+            
+                if (librosCoincidentes.isEmpty()) {
+                    System.out.println(AnsiColors.RED.TXT + "No se encontró el libro prestado con ese título." + AnsiColors.RESET);
+                    Timer.main(null);
+                    CleanScreen.CleanScreen();
+                    break;
+                }
+            
+                Book libroDevolver = null;
+            
+                if (librosCoincidentes.size() == 1) {
+                    libroDevolver = librosCoincidentes.get(0);
+                } else {
+                    System.out.println(AnsiColors.BLUE.TXT + "Se encontraron varios libros con el mismo título. Ingrese el nombre del autor: " + AnsiColors.RESET);
+                    String autorDevolucion = input.nextLine();
                     System.out.println();
-                    encontrado = false;
-
-                    for (Book libroPrestado : cliente.getLibrosPrestados()) {
-                        if (libroPrestado.getTitle().toLowerCase().contains(devolucion.toLowerCase())) {
-                            libroPrestado.devolver();
-                            cliente.getLibrosPrestados().remove(libroPrestado);
-                            System.out.println(AnsiColors.GREEN.TXT + "El libro " + AnsiColors.RESET + devolucion + AnsiColors.GREEN.TXT + " prestado por el cliente " + AnsiColors.RESET +  clienteDevolucion + AnsiColors.GREEN.TXT + " ha sido devuelto con éxito." + AnsiColors.RESET);
-                            encontrado = true;
-                            Timer.main(null);
-                            CleanScreen.CleanScreen();
+            
+                    for (Book libro : librosCoincidentes) {
+                        if (libro.getAuthor().equalsIgnoreCase(autorDevolucion)) {
+                            libroDevolver = libro;
                             break;
                         }
                     }
-                    if (!encontrado) {
-                        System.out.println(AnsiColors.RED.TXT + "No se encontró el libro." + AnsiColors.RESET);
+            
+                    if (libroDevolver == null) {
+                        System.out.println(AnsiColors.RED.TXT + "No se encontró un libro con ese título y autor." + AnsiColors.RESET);
                         Timer.main(null);
                         CleanScreen.CleanScreen();
+                        break;
                     }
-                    break;
+                }
+            
+                // Remover el libro del cliente y actualizar el stock
+                libroDevolver.devolver();
+                cliente.getLibrosPrestados().remove(libroDevolver);
+            
+                System.out.println(AnsiColors.GREEN.TXT + "El libro " + AnsiColors.RESET + libroDevolver.getTitle() +
+                        AnsiColors.GREEN.TXT + " prestado por el cliente " + AnsiColors.RESET + cliente.getNombre() +
+                        AnsiColors.GREEN.TXT + " ha sido devuelto con éxito." + AnsiColors.RESET);
+            
+                Timer.main(null);
+                CleanScreen.CleanScreen();
+                break;
 
                 case 5: // <FUNCIONANDO>
                     System.out.println(AnsiColors.INVERTIDO.TXT + ">>    Registro de nuevo libro    <<" + AnsiColors.RESET);
