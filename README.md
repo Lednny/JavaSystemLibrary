@@ -1,2 +1,2 @@
 # BibliotecaFINAL
-Proyecto final de la materia "Programación Orientada a Objetos"
+Lógica de Sistema Bibliotecario Digital.
