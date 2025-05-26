@@ -1,2 +1,2 @@
 # BibliotecaFINAL
-Verisón Final de Sistema Bibliotecario Digital.
+Verisón Final de Lógica de Sistema Bibliotecario Digital.
