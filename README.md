@@ -32,6 +32,12 @@
 - `Book.java` — Model class representing a book, including title, author, genre, and stock.
 - Other utility classes for user management, screen cleaning, and color output.
 
+## Captures
+![Image alt](https://github.com/Lednny/JavaSystemLibrary/blob/f0f6c3eebbc76cc008a05078a5a97332b61fe272/Captura%20de%20pantalla%202025-07-13%20153709.png)
+![Image alt](https://github.com/Lednny/JavaSystemLibrary/blob/f0f6c3eebbc76cc008a05078a5a97332b61fe272/Captura%20de%20pantalla%202025-07-13%20153846.png)
+![Image alt](https://github.com/Lednny/JavaSystemLibrary/blob/f0f6c3eebbc76cc008a05078a5a97332b61fe272/Captura%20de%20pantalla%202025-07-13%20153907.png)
+![Image alt](https://github.com/Lednny/JavaSystemLibrary/blob/f0f6c3eebbc76cc008a05078a5a97332b61fe272/Captura%20de%20pantalla%202025-07-13%20153932.png)
+
 ## Usage
 
 1. **Compile** all Java files:
