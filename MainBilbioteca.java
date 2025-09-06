@@ -118,6 +118,7 @@ public class MainBilbioteca {
             if (book.getTitle().equalsIgnoreCase(titulo)) {
                 librosEncontrados.add(book);
             }
+            input.close();
         }
         if (librosEncontrados.size() == 0) {
             return null;
@@ -143,6 +144,7 @@ public class MainBilbioteca {
         System.out.println(AnsiColors.BLUE.TXT + "Ingrese el nombre del cliente: " + AnsiColors.RESET);
         String nombre = input.nextLine();
         System.out.println();
+        input.close();
         for (Cliente cliente : clientes) {
             if (cliente.getNombre().equalsIgnoreCase(nombre.toLowerCase())) {
                 return cliente;
